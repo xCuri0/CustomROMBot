@@ -1,7 +1,7 @@
 from discord.ext import commands
 from requests import get
 from hurry.filesize import size
-import json
+
 
 class ROMResolver(commands.Cog):
     def __init__(self, bot):
@@ -13,8 +13,8 @@ class ROMResolver(commands.Cog):
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
             filesize = size(int(usr['response'][-1]['size']))
-            reply_text = f"**Download:** {usr['response'][-1]['filename']}\n" \
-                         f"**URL:** {usr['response'][-1]['url']}\n" \
+            reply_text = f"**Download:** `{usr['response'][-1]['filename']}`\n" \
+                         f"**URL:** <{usr['response'][-1]['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][-1]['version']}`"
             await ctx.send(reply_text)
@@ -28,7 +28,7 @@ class ROMResolver(commands.Cog):
             usr = fetch.json()
             filesize = size(int(usr['response'][-1]['size']))
             reply_text = f"**Download:** {usr['response'][-1]['filename']}\n" \
-                         f"**URL:** {usr['response'][-1]['url']}\n" \
+                         f"**URL:** <{usr['response'][-1]['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][-1]['version']}`"
             await ctx.send(reply_text)
@@ -42,10 +42,10 @@ class ROMResolver(commands.Cog):
             usr = fetch.json()
             filesize = size(int(usr['size']))
             reply_text = f"**Download:** `{usr['filename']}`\n" \
-                         f"**URL:** {usr['url']}\n" \
+                         f"**URL:** <{usr['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Android Version:** `{usr['version']}`\n" \
-                         f"**Maintainer:** {usr['maintainer']}: {usr['maintainer_url']}\n" \
+                         f"**Maintainer:** {usr['maintainer']}: <{usr['maintainer_url']}>\n" \
                          f"**XDA Thread:** {usr['forum_url']}"
             await ctx.send(reply_text)
         elif fetch.status_code == 404:
@@ -58,7 +58,7 @@ class ROMResolver(commands.Cog):
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** {usr['response'][0]['url']}\n" \
+                         f"**URL:** <{usr['response'][0]['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n"
         elif fetch.status_code == 404:
@@ -72,7 +72,7 @@ class ROMResolver(commands.Cog):
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** {usr['response'][0]['url']}\n" \
+                         f"**URL:** <{usr['response'][0]['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n"
         elif fetch.status_code == 404:
@@ -86,7 +86,7 @@ class ROMResolver(commands.Cog):
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** {usr['response'][0]['url']}\n" \
+                         f"**URL:** <{usr['response'][0]['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n" \
                          f"**XDA Thread:** `{usr['response'][0]['xda']}`"
@@ -101,7 +101,7 @@ class ROMResolver(commands.Cog):
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** {usr['response'][0]['url']}\n" \
+                         f"**URL:** <{usr['response'][0]['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n"
         elif fetch.status_code == 404:
@@ -115,7 +115,7 @@ class ROMResolver(commands.Cog):
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** {usr['response'][0]['url']}\n" \
+                         f"**URL:** <{usr['response'][0]['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n"
         elif fetch.status_code == 404:
@@ -128,8 +128,8 @@ class ROMResolver(commands.Cog):
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
             filesize = size(int(usr['response'][-1]['size']))
-            reply_text = f"**Download:** {usr['response'][-1]['filename']}\n" \
-                         f"**URL:** {usr['response'][-1]['url']}\n" \
+            reply_text = f"**Download:** `{usr['response'][-1]['filename']}`\n" \
+                         f"**URL:** <{usr['response'][-1]['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][-1]['version']}`\n" \
                          f"**Type:** {usr['response'][-1]['romtype']}"
