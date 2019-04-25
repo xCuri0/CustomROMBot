@@ -15,6 +15,7 @@ loaded_extensions = []
 
 bot.remove_command("help")
 
+
 @bot.event
 async def on_ready():
     print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
@@ -33,5 +34,18 @@ async def on_ready():
             print('Failed to load extension {}\n\t->{}'.format(extension, exc))
     print('Successfully loaded the following extension(s): {}'.format(loaded_extensions))
 
+
+@bot.command()
+async def help(ctx):
+    message = "Commands:\n" \
+              "dotos\n" \
+              "evo\n" \
+              "havoc\n" \
+              "pearl\n" \
+              "pixy\n" \
+              "posp\n" \
+              "posptest\n" \
+              "viper"
+    await ctx.send(message)
 
 bot.run(private_stuff.token, bot=True, reconnect=True)
