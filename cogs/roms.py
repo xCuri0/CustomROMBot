@@ -140,7 +140,6 @@ class ROMResolver(commands.Cog):
     @commands.command()
     async def miuirecovery(self, ctx, phone, place=None):
         device = phone + '_global'
-        print('uh wat')
         if place == 'china':
             device = phone.replace('_global', '')
         elif place == 'india':
