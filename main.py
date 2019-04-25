@@ -45,7 +45,8 @@ async def help(ctx):
               "pixy\n" \
               "posp\n" \
               "posptest\n" \
-              "viper"
+              "viper\n" \
+              "lineage"
     await ctx.send(message)
 
 bot.run(private_stuff.token, bot=True, reconnect=True)
