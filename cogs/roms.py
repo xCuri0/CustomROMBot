@@ -146,7 +146,7 @@ class ROMResolver(commands.Cog):
             device = phone.replace('_global', '_in_global')
         else:
             pass
-        result = "Recovery ROM\n"
+        result = "**Recovery ROM**\n"
         result += "Stable\n"
         stable_all = json.loads(get(
                 "https://raw.githubusercontent.com/XiaomiFirmwareUpdater/miui-updates-tracker/master/" +
@@ -166,6 +166,29 @@ class ROMResolver(commands.Cog):
             result += f"    _Version:_ {i['version']}\n"
             result += f"    _Filename:_ {i['filename']}\n"
             result += f"    _Link:_ {i['download']}"
+
+    @commands.command()
+    async def miuifastboot(self, ctx, device):
+        result = '**Fastboot ROM**\n'
+        result += "Stable\n"
+        stable_all = json.loads(get(
+                "https://raw.githubusercontent.com/XiaomiFirmwareUpdater/miui-updates-tracker/master/" +
+                "stable_fastboot/stable_fastboot.json").content)
+        data = [i for i in stable_all if device == i['codename']]
+        for i in data:
+            result += f"    _Version:_ {i['version']}\n"
+            result += f"    _Filename:_ {i['filename']}\n"
+            result += f"    _Link:_ {i['download']}\n\n"
+
+        result += "Weekly\n"
+        weekly_all = json.loads(get(
+                "https://raw.githubusercontent.com/XiaomiFirmwareUpdater/miui-updates-tracker/master/" +
+                "weekly_fastboot/weekly_fastboot.json").content)
+        data = [i for i in weekly_all if device == i['codename']]
+        for i in data:
+            result += f"    _Version:_ {i['version']}\n"
+            result += f"    _Filename:_ {i['filename']}\n"
+            result += f"    _Link:_ {i['download']}\n\n"
 
         await ctx.send(result)
 
