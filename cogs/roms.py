@@ -12,7 +12,7 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly')
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
-            reply_text = f"**Download:** [{usr['response'][-1]['filename']}]\n" \
+            reply_text = f"**Download:** {usr['response'][-1]['filename']}\n" \
                          f"**URL:** {usr['response'][-1]['url']}\n" \
                          f"**Size:** `{usr['response'][-1]['size']}`\n" \
                          f"**Version:** `{usr['response'][-1]['version']}`"
@@ -25,7 +25,7 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=mashed')
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
-            reply_text = f"**Download:** [{usr['response'][-1]['filename']}]\n" \
+            reply_text = f"**Download:** {usr['response'][-1]['filename']}\n" \
                          f"**URL:** {usr['response'][-1]['url']}\n" \
                          f"**Size:** `{usr['response'][-1]['size']}`\n" \
                          f"**Version:** `{usr['response'][-1]['version']}`"
