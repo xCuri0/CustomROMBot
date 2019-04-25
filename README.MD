@@ -1,7 +1,7 @@
 # Custom ROM Discord Bot
 Can show latest builds from official devices for each respective supported roms.
 
-prefix: >.
+prefix: !
 #### Supported ROMS:
 * LineageOS
 * DotOS
@@ -24,4 +24,4 @@ Then make a private_stuff.py in the same directory as main.py and put your token
  ```
  python3 main.py
  ```
- and view >.help
+ and view !help
