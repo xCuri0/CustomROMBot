@@ -38,15 +38,15 @@ async def on_ready():
 @bot.command()
 async def help(ctx):
     message = "Commands:\n" \
-              "dotos\n" \
-              "evo\n" \
-              "havoc\n" \
-              "pearl\n" \
-              "pixy\n" \
-              "posp\n" \
-              "posptest\n" \
-              "viper\n" \
-              "lineage\n" \
+              "dotos (device)\n" \
+              "evo (device)\n" \
+              "havoc (device)\n" \
+              "pearl (device)\n" \
+              "pixy (device)\n" \
+              "posp (device)\n" \
+              "posptest (device)\n" \
+              "viper (device)\n" \
+              "lineage (device)\n" \
               "miuifastboot (device) (china/india)\n" \
               "miuirecovery (device) (china/india)"
     await ctx.send(message)
