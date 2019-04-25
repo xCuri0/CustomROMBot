@@ -140,6 +140,7 @@ class ROMResolver(commands.Cog):
     @commands.command()
     async def miuirecovery(self, ctx, phone, place=None):
         device = phone + '_global'
+        print('uh wat')
         if place == 'china':
             device = phone.replace('_global', '')
         elif place == 'india':
@@ -167,7 +168,7 @@ class ROMResolver(commands.Cog):
             result += f"    _Filename:_ {i['filename']}\n"
             result += f"    _Link:_ {i['download']}"
 
-        ctx.send(result)
+        await ctx.send(result)
 
     @commands.command()
     async def miuifastboot(self, ctx, device):
