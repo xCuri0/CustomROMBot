@@ -46,7 +46,9 @@ async def help(ctx):
               "posp\n" \
               "posptest\n" \
               "viper\n" \
-              "lineage"
+              "lineage\n" \
+              "miuifastboot (device) (china/india)\n" \
+              "miuirecovery (device) (china/india)"
     await ctx.send(message)
 
 bot.run(private_stuff.token, bot=True, reconnect=True)
