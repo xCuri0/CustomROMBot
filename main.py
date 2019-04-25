@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 import private_stuff
 
-prefix = ">."
+prefix = "!"
 
 bot = commands.Bot(command_prefix=prefix)
 
@@ -15,6 +15,14 @@ loaded_extensions = []
 
 bot.remove_command("help")
 
+roms = 'DotOS (dotos)\n' \
+       'Evolution-X (evo)\n' \
+       'HavocOS (havoc)\n' \
+       'PearlOS (pearl)\n' \
+       'PixysOS (pixy)\n' \
+       'Potato Open Sauce Project (posp)\n' \
+       'ViperOS (viper)\n' \
+       'LineageOS (lineage)\n'
 
 @bot.event
 async def on_ready():
@@ -37,18 +45,10 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
-    message = "Commands:\n" \
-              "dotos (device)\n" \
-              "evo (device)\n" \
-              "havoc (device)\n" \
-              "pearl (device)\n" \
-              "pixy (device)\n" \
-              "posp (device)\n" \
-              "posptest (device)\n" \
-              "viper (device)\n" \
-              "lineage (device)\n" \
-              "miuifastboot (device) (china/india)\n" \
-              "miuirecovery (device) (china/india)"
-    await ctx.send(message)
+    embed = discord.Embed(title="Custom ROM Bot help", color=0x5eff72)
+    embed.add_field(name="ROMs Available:", value=f"{roms}", inline=False)
+    embed.add_field(name="Usage:", value="!(rom) (device) \nExample: !evo tissot", inline=False)
+    embed.set_footer(text="bot was made by Keikei14 | Keikei14# 7950")
+    await ctx.send(embed=embed)
 
 bot.run(private_stuff.token, bot=True, reconnect=True)
