@@ -167,6 +167,8 @@ class ROMResolver(commands.Cog):
             result += f"    _Filename:_ {i['filename']}\n"
             result += f"    _Link:_ {i['download']}"
 
+        ctx.send(result)
+
     @commands.command()
     async def miuifastboot(self, ctx, device):
         result = '**Fastboot ROM**\n'
