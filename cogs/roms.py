@@ -1,6 +1,6 @@
 from discord.ext import commands
 from requests import get
-import discord
+from hurry.filesize import size
 
 
 class ROMResolver(commands.Cog):
@@ -12,9 +12,10 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly')
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
+            filesize = size(int(usr['response'][-1]['size']))
             reply_text = f"**Download:** {usr['response'][-1]['filename']}\n" \
                          f"**URL:** {usr['response'][-1]['url']}\n" \
-                         f"**Size:** `{usr['response'][-1]['size']}`\n" \
+                         f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][-1]['version']}`"
             await ctx.send(reply_text)
         else:
@@ -25,9 +26,10 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=mashed')
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
+            filesize = size(int(usr['response'][-1]['size']))
             reply_text = f"**Download:** {usr['response'][-1]['filename']}\n" \
                          f"**URL:** {usr['response'][-1]['url']}\n" \
-                         f"**Size:** `{usr['response'][-1]['size']}`\n" \
+                         f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][-1]['version']}`"
             await ctx.send(reply_text)
         else:
@@ -38,9 +40,10 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://raw.githubusercontent.com/evolution-x/official_devices/master/builds/{device}.json')
         if fetch.status_code == 200:
             usr = fetch.json()
+            filesize = size(int(usr['size']))
             reply_text = f"**Download:** `{usr['filename']}`\n" \
                          f"**URL:** {usr['url']}\n" \
-                         f"**Size:** `{usr['size']}`\n" \
+                         f"**Size:** `{filesize}`\n" \
                          f"**Android Version:** `{usr['version']}`\n" \
                          f"**Maintainer:** {usr['maintainer']}: {usr['maintainer_url']}\n" \
                          f"**XDA Thread:** {usr['forum_url']}"
@@ -53,9 +56,10 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://raw.githubusercontent.com/Viper-Devices/official_devices/master/{device}/build.json')
         if fetch.status_code == 200:
             usr = fetch.json()
+            filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
                          f"**URL:** {usr['response'][0]['url']}\n" \
-                         f"**Size:** `{usr['response'][0]['size']}`\n" \
+                         f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n"
         elif fetch.status_code == 404:
             reply_text = 'Device not found!'
@@ -66,9 +70,10 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://raw.githubusercontent.com/DotOS/ota_config/dot-p/{device}.json')
         if fetch.status_code == 200:
             usr = fetch.json()
+            filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
                          f"**URL:** {usr['response'][0]['url']}\n" \
-                         f"**Size:** `{usr['response'][0]['size']}`\n" \
+                         f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n"
         elif fetch.status_code == 404:
             reply_text = 'Device not found!'
@@ -79,9 +84,10 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://raw.githubusercontent.com/PearlOS/OTA/master/{device}.json')
         if fetch.status_code == 200:
             usr = fetch.json()
+            filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
                          f"**URL:** {usr['response'][0]['url']}\n" \
-                         f"**Size:** `{usr['response'][0]['size']}`\n" \
+                         f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n" \
                          f"**XDA Thread:** `{usr['response'][0]['xda']}`"
         elif fetch.status_code == 404:
@@ -93,9 +99,10 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://raw.githubusercontent.com/PixysOS-Devices/official_devices/master/{device}/build.json')
         if fetch.status_code == 200:
             usr = fetch.json()
+            filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
                          f"**URL:** {usr['response'][0]['url']}\n" \
-                         f"**Size:** `{usr['response'][0]['size']}`\n" \
+                         f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n"
         elif fetch.status_code == 404:
             reply_text = 'Device not found!'
@@ -106,9 +113,10 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json')
         if fetch.status_code == 200:
             usr = fetch.json()
+            filesize = size(int(usr['response'][0]['size']))
             reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
                          f"**URL:** {usr['response'][0]['url']}\n" \
-                         f"**Size:** `{usr['response'][0]['size']}`\n" \
+                         f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n"
         elif fetch.status_code == 404:
             reply_text = 'Device not found!'
