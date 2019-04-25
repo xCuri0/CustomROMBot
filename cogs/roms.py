@@ -19,7 +19,7 @@ class ROMResolver(commands.Cog):
                          f"**Version:** `{usr['response'][-1]['version']}`"
             await ctx.send(reply_text)
         else:
-            ctx.send('Device not found!')
+            await ctx.send('Device not found!')
 
     @commands.command()
     async def posptest(self, ctx, device):
@@ -121,6 +121,21 @@ class ROMResolver(commands.Cog):
         elif fetch.status_code == 404:
             reply_text = 'Device not found!'
         await ctx.send(reply_text)
+
+    @commands.command()
+    async def lineage(self, ctx, device):
+        fetch = get(f'https://download.lineageos.org/api/v1/{device}/nightly/*')
+        if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
+            usr = fetch.json()
+            filesize = size(int(usr['response'][-1]['size']))
+            reply_text = f"**Download:** {usr['response'][-1]['filename']}\n" \
+                         f"**URL:** {usr['response'][-1]['url']}\n" \
+                         f"**Size:** `{filesize}`\n" \
+                         f"**Version:** `{usr['response'][-1]['version']}`\n" \
+                         f"**Type:** {usr['response'][-1]['romtype']}"
+            await ctx.send(reply_text)
+        else:
+            await ctx.send('Device not found!')
 
 
 def setup(bot):
