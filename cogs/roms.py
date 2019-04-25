@@ -138,7 +138,7 @@ class ROMResolver(commands.Cog):
             await ctx.send('Device not found!')
 
     @commands.command()
-    async def miui(self, ctx, phone, place=None):
+    async def miuirecovery(self, ctx, phone, place=None):
         device = phone + '_global'
         if place == 'china':
             device = phone.replace('_global', '')
