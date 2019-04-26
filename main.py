@@ -46,10 +46,11 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
-    embed = discord.Embed(title="Custom ROM Bot help", color=0x5eff72)
+    embed = discord.Embed(title="Custom ROM Bot help", description="Fetches latest builds from "
+                                                                   "official devices", color=0x5eff72)
     embed.add_field(name="ROMs Available:", value=f"{roms}", inline=False)
     embed.add_field(name="Usage:", value="!(rom) (device) \nExample: !evo tissot", inline=False)
-    embed.set_footer(text="bot was made by Keikei14 | Keikei14# 7950")
+    embed.set_footer(text="bot was made by Keikei14 | Keikei14#7950")
     await ctx.send(embed=embed)
 
 bot.run(private_stuff.token, bot=True, reconnect=True)
