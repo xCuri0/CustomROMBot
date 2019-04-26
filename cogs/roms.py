@@ -46,7 +46,7 @@ class ROMResolver(commands.Cog):
                          f"**Size:** `{filesize}`\n" \
                          f"**Android Version:** `{usr['version']}`\n" \
                          f"**Maintainer:** {usr['maintainer']}: <{usr['maintainer_url']}>\n" \
-                         f"**XDA Thread:** {usr['forum_url']}"
+                         f"**XDA Thread:** <{usr['forum_url']}>"
             await ctx.send(reply_text)
         elif fetch.status_code == 404:
             await ctx.send("Device not found!")
@@ -89,7 +89,7 @@ class ROMResolver(commands.Cog):
                          f"**URL:** <{usr['response'][0]['url']}>\n" \
                          f"**Size:** `{filesize}`\n" \
                          f"**Version:** `{usr['response'][0]['version']}`\n" \
-                         f"**XDA Thread:** `{usr['response'][0]['xda']}`"
+                         f"**XDA Thread:** <{usr['response'][0]['xda']}>"
         elif fetch.status_code == 404:
             reply_text = 'Device not found!'
         await ctx.send(reply_text)
