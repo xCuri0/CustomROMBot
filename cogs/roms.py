@@ -137,6 +137,25 @@ class ROMResolver(commands.Cog):
         else:
             await ctx.send('Device not found!')
 
+    @commands.command()
+    async def pe(self, ctx, device, version='pie'):
+        if version == 'caf':
+            version = 'pie_caf'
+        fetch = get(f'https://download.pixelexperience.org/ota_v2/{device}/{version}')
+        usr = fetch.json()
+        if not usr['error']:
+            filesize = size(int(usr['size']))
+            reply_text = f"**Download:** `{usr['filename']}`\n" \
+                         f"**URL:** <{usr['url']}>\n" \
+                         f"**Size:** `{filesize}`\n" \
+                         f"**Version:** `{usr['version']}`\n" \
+                         f"**Forum URL:** <{usr['forum_url']}>\n" \
+                         f"**Maintainer:** {usr['maintainer']}\n" \
+                         f"**Maintainer URL:** <{usr['maintainer_url']}>"
+            await ctx.send(reply_text)
+        elif usr['error']:
+            ctx.send("Device/Version not found!")
+
 
 def setup(bot):
     bot.add_cog(ROMResolver(bot))

@@ -22,7 +22,8 @@ roms = 'DotOS (dotos)\n' \
        'PixysOS (pixy)\n' \
        'Potato Open Sauce Project (posp)\n' \
        'ViperOS (viper)\n' \
-       'LineageOS (lineage)\n'
+       'LineageOS (lineage)\n' \
+       'PixelExperience (pe) \n'
 
 @bot.event
 async def on_ready():
