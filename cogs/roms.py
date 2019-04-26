@@ -8,7 +8,8 @@ class ROMResolver(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def posp(self, ctx, device):
+    async def posp(self, ctx, phone):
+        device = phone.lower()
         fetch = get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly')
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
@@ -22,7 +23,8 @@ class ROMResolver(commands.Cog):
             await ctx.send('Device not found!')
 
     @commands.command()
-    async def posptest(self, ctx, device):
+    async def posptest(self, ctx, phone):
+        device = phone.lower()
         fetch = get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=mashed')
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
@@ -36,7 +38,8 @@ class ROMResolver(commands.Cog):
             ctx.send('Device not found!')
 
     @commands.command()
-    async def evo(self, ctx, device):
+    async def evo(self, ctx, phone):
+        device = phone.lower()
         fetch = get(f'https://raw.githubusercontent.com/evolution-x/official_devices/master/builds/{device}.json')
         if fetch.status_code == 200:
             usr = fetch.json()
@@ -52,7 +55,8 @@ class ROMResolver(commands.Cog):
             await ctx.send("Device not found!")
 
     @commands.command()
-    async def viper(self, ctx, device):
+    async def viper(self, ctx, phone):
+        device = phone.lower()
         fetch = get(f'https://raw.githubusercontent.com/Viper-Devices/official_devices/master/{device}/build.json')
         if fetch.status_code == 200:
             usr = fetch.json()
@@ -66,7 +70,8 @@ class ROMResolver(commands.Cog):
         await ctx.send(reply_text)
 
     @commands.command()
-    async def dotos(self, ctx, device):
+    async def dotos(self, ctx, phone):
+        device = phone.lower()
         fetch = get(f'https://raw.githubusercontent.com/DotOS/ota_config/dot-p/{device}.json')
         if fetch.status_code == 200:
             usr = fetch.json()
@@ -80,7 +85,8 @@ class ROMResolver(commands.Cog):
         await ctx.send(reply_text)
 
     @commands.command()
-    async def pearl(self, ctx, device):
+    async def pearl(self, ctx, phone):
+        device = phone.lower()
         fetch = get(f'https://raw.githubusercontent.com/PearlOS/OTA/master/{device}.json')
         if fetch.status_code == 200:
             usr = fetch.json()
@@ -95,7 +101,8 @@ class ROMResolver(commands.Cog):
         await ctx.send(reply_text)
 
     @commands.command()
-    async def pixy(self, ctx, device):
+    async def pixy(self, ctx, phone):
+        device = phone.lower()
         fetch = get(f'https://raw.githubusercontent.com/PixysOS-Devices/official_devices/master/{device}/build.json')
         if fetch.status_code == 200:
             usr = fetch.json()
@@ -109,7 +116,8 @@ class ROMResolver(commands.Cog):
         await ctx.send(reply_text)
 
     @commands.command()
-    async def havoc(self, ctx, device):
+    async def havoc(self, ctx, phone):
+        device = phone.lower()
         fetch = get(f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json')
         if fetch.status_code == 200:
             usr = fetch.json()
@@ -123,7 +131,8 @@ class ROMResolver(commands.Cog):
         await ctx.send(reply_text)
 
     @commands.command()
-    async def lineage(self, ctx, device):
+    async def lineage(self, ctx, phone):
+        device = phone.lower()
         fetch = get(f'https://download.lineageos.org/api/v1/{device}/nightly/*')
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
@@ -138,10 +147,16 @@ class ROMResolver(commands.Cog):
             await ctx.send('Device not found!')
 
     @commands.command()
-    async def pe(self, ctx, device, version='pie'):
-        if version == 'caf':
-            version = 'pie_caf'
-        fetch = get(f'https://download.pixelexperience.org/ota_v2/{device}/{version}')
+    async def pe(self, ctx, phone, peversion=None):
+        device = phone.lower()
+        if peversion is None:
+            fetch = get(f'https://download.pixelexperience.org/ota_v2/{device}/pie')
+        elif peversion.lower() == 'caf':
+            fetch = get(f'https://download.pixelexperience.org/ota_v2/{device}/pie_caf')
+        elif peversion.lower() == 'oreo':
+            fetch = get(f'https://download.pixelexperience.org/ota_v2/{device}/oreo')
+        else:
+            return await ctx.send('Device/Version not found!')
         usr = fetch.json()
         if not usr['error']:
             filesize = size(int(usr['size']))
