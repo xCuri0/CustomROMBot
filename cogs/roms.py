@@ -154,7 +154,7 @@ class ROMResolver(commands.Cog):
                          f"**Maintainer URL:** <{usr['maintainer_url']}>"
             await ctx.send(reply_text)
         elif usr['error']:
-            ctx.send("Device/Version not found!")
+            await ctx.send("Device/Version not found!")
 
 
 def setup(bot):
