@@ -153,6 +153,8 @@ class ROMResolver(commands.Cog):
             fetch = get(f'https://download.pixelexperience.org/ota_v2/{device}/pie')
         elif peversion.lower() == 'caf':
             fetch = get(f'https://download.pixelexperience.org/ota_v2/{device}/pie_caf')
+        elif peversion.lower() == 'pie_caf':
+            fetch = get(f'https://download.pixelexperience.org/ota_v2/{device}/pie_caf')
         elif peversion.lower() == 'oreo':
             fetch = get(f'https://download.pixelexperience.org/ota_v2/{device}/oreo')
         else:
