@@ -19,11 +19,11 @@ class CommandErrorHandler(commands.Cog):
         error = getattr(error, 'original', error)
         
         if isinstance(error, commands.CommandNotFound):
-            return await ctx.send('Command not found!')
+            return await ctx.send('Command not found! View !help.')
 
         elif isinstance(error, commands.MissingRequiredArgument):
             print(error)
-            return await ctx.send(f'What device? It should be >.{ctx.command} (device)')
+            return await ctx.send(f'What device? It should be !{ctx.command} (device)')
 
         elif isinstance(error, commands.DisabledCommand):
             return await ctx.send(f'{ctx.command} has been disabled.')
