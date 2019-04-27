@@ -21,10 +21,10 @@ class ROMResolver(commands.Cog):
                     if str(usr['response']) != "[]":
                         builddate = date.fromtimestamp(usr['response'][-1]['datetime'])
                         filesize = size(int(usr['response'][-1]['size']))
-                        valued = f"[{usr['response'][-1]['filename']}]({usr['response'][-1]['url']})\n" \
-                                 f"**Build Date**: `{builddate}`\n" \
+                        valued = f"**Build Date**: `{builddate}`\n" \
                                  f"**Size**: `{filesize}`\n" \
-                                 f"**Version**: `{usr['response'][-1]['version']}`"
+                                 f"**Version**: `{usr['response'][-1]['version']}\n`" \
+                                 f"**Download**: [{usr['response'][-1]['filename']}]({usr['response'][-1]['url']})"
                         embed = discord.Embed(title="Potato Open Sauce Project | {device}",
                                               description=valued,
                                               color=embedcolor)
@@ -43,10 +43,10 @@ class ROMResolver(commands.Cog):
                     usr = await fetch.json(content_type=None)
                     filesize = size(int(usr['size']))
                     builddate = date.fromtimestamp(usr['datetime'])
-                    valued = f"[{usr['filename']}]({usr['url']})\n" \
-                        f"**Build date**: `{builddate}`\n" \
+                    valued = f"**Build date**: `{builddate}`\n" \
                         f"**Size**: `{filesize}`\n" \
-                        f"**Version**: `{usr['version']}`"
+                        f"**Version**: `{usr['version']}`\n" \
+                        f"**Download**: [{usr['filename']}]({usr['url']})"
                     embed = discord.Embed(title="Evolution-X | {device}",
                                           description=valued,
                                           color=embedcolor)
@@ -63,10 +63,10 @@ class ROMResolver(commands.Cog):
                     usr = await fetch.json(content_type=None)
                     filesize = size(int(usr['response'][0]['size']))
                     builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
-                    valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
-                        f"**Build date**: `{builddate}`\n" \
+                    valued = f"**Build date**: `{builddate}`\n" \
                         f"**Size**: `{filesize}`\n" \
-                        f"**Version**: `{usr['response'][0]['version']}`"
+                        f"**Version**: `{usr['response'][0]['version']}\n`" \
+                        f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
                     embed = discord.Embed(title="ViperOS | {device}",
                                           description=valued,
                                           color=embedcolor)
@@ -83,10 +83,10 @@ class ROMResolver(commands.Cog):
                     usr = await fetch.json(content_type=None)
                     filesize = size(int(usr['response'][0]['size']))
                     builddate = date.fromtimestamp(usr['response'][0]['datetime'])
-                    valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
-                        f"**Build date**: `{builddate}`\n" \
+                    valued = f"**Build date**: `{builddate}`\n" \
                         f"**Size**: `{filesize}`\n" \
-                        f"**Version**: `{usr['response'][0]['version']}`"
+                        f"**Version**: `{usr['response'][0]['version']}\n`" \
+                        f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
                     embed = discord.Embed(title="DotOS | {device}",
                                           description=valued,
                                           color=embedcolor)
@@ -103,10 +103,10 @@ class ROMResolver(commands.Cog):
                     usr = await fetch.json(content_type=None)
                     filesize = size(int(usr['response'][0]['size']))
                     builddate = date.fromtimestamp(usr['response'][0]['datetime'])
-                    valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
-                        f"**Build date**: `{builddate}`\n" \
+                    valued = f"**Build date**: `{builddate}`\n" \
                         f"**Size**: `{filesize}`\n" \
-                        f"**Version**: `{usr['response'][0]['version']}`"
+                        f"**Version**: `{usr['response'][0]['version']}`\n" \
+                        f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
                     embed = discord.Embed(title="PearlOS | {device}",
                                           description=valued,
                                           color=embedcolor)
@@ -123,10 +123,10 @@ class ROMResolver(commands.Cog):
                     usr = await fetch.json(content_type=None)
                     filesize = size(int(usr['response'][0]['size']))
                     builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
-                    valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
-                             f"**Build date**: `{builddate}`\n" \
+                    valued = f"**Build date**: `{builddate}`\n" \
                              f"**Size**: `{filesize}`\n" \
-                             f"**Version**: `{usr['response'][0]['version']}`"
+                             f"**Version**: `{usr['response'][0]['version']}\n`" \
+                             f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
                     embed = discord.Embed(title="PixysOS | {device}",
                                           description=valued,
                                           color=embedcolor)
@@ -143,10 +143,10 @@ class ROMResolver(commands.Cog):
                     usr = await fetch.json(content_type=None)
                     filesize = size(int(usr['response'][0]['size']))
                     builddate = date.fromtimestamp(usr['response'][0]['datetime'])
-                    valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
-                             f"**Build date**: `{builddate}`\n" \
+                    valued = f"**Build date**: `{builddate}`\n" \
                              f"**Size**: `{filesize}`\n" \
-                             f"**Version**: `{usr['response'][0]['version']}`"
+                             f"**Version**: `{usr['response'][0]['version']}\n`" \
+                             f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
                     embed = discord.Embed(title="HavocOS | {device}",
                                           description=valued,
                                           color=embedcolor)
@@ -155,7 +155,7 @@ class ROMResolver(commands.Cog):
                 elif fetch.status == 404:
                     await ctx.send("Device not found!")
 
-    @commands.command()
+    @commands.command(aliases=['los'])
     async def lineage(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://download.lineageos.org/api/v1/{device}/nightly/*') as fetch:
@@ -164,10 +164,10 @@ class ROMResolver(commands.Cog):
                     if str(usr['response']) != "[]":
                         filesize = size(usr['response'][0]['size'])
                         builddate = date.fromtimestamp(usr['response'][-1]['datetime'])
-                        valued = f"[{usr['response'][-1]['filename']}]({usr['response'][-1]['url']})\n" \
-                                 f"**Build date**: `{builddate}`\n" \
+                        valued = f"**Build date**: `{builddate}`\n" \
                                  f"**Size**: `{filesize}`\n" \
-                                 f"**Version**: `{usr['response'][-1]['version']}`"
+                                 f"**Version**: `{usr['response'][-1]['version']}\n`" \
+                                 f"**Download**: [{usr['response'][-1]['filename']}]({usr['response'][-1]['url']})"
                         embed = discord.Embed(title="LineageOS | {device}",
                                               description=valued,
                                               color=embedcolor)
@@ -209,17 +209,17 @@ class ROMResolver(commands.Cog):
         if not usr['error']:
             filesize = size(usr['size'])
             builddate = date.fromtimestamp(usr['datetime'])
-            valued = f"[{usr['filename']}]({usr['url']})\n" \
-                     f"**Build date**: `{builddate}`\n" \
+            valued = f"**Build date**: `{builddate}`\n" \
                      f"**Size**: `{filesize}`\n" \
-                     f"**Version**: `{usr['version']}`"
+                     f"**Version**: `{usr['version']}\n`" \
+                     f"**Download**: [{usr['filename']}]({usr['url']})"
             embed = discord.Embed(title="Pixel Experience | {device}",
                                   description=valued,
                                   color=embedcolor)
             embed.set_footer(text=embedfooter)
             await ctx.send(embed=embed)
         elif usr['error']:
-            await ctx.send("Device/Version not found!")
+            await ctx.send("Device/version not found!")
 
     @commands.command(aliases=['btlg'])
     async def bootleggers(self, ctx, device: str):
@@ -229,18 +229,18 @@ class ROMResolver(commands.Cog):
                     usr = await devices.json()
                     if device in usr:
                         filesize = size(int(usr[device]['buildsize']))
-                        valued = f"[{usr[device]['filename']}]({usr[device]['download']})\n" \
-                                 f"**Build date**: `{usr[device]['buildate']}`\n" \
-                                 f"**Size**: `{filesize}`\n"
+                        valued = f"**Build date**: `{usr[device]['buildate']}`\n" \
+                                 f"**Size**: `{filesize}`\n" \
+                                 f"**Download**: [{usr[device]['filename']}]({usr[device]['download']})"
                         embed = discord.Embed(title="BootleggersROM | {device}",
                                               description=valued,
                                               color=embedcolor)
                         embed.set_footer(text=embedfooter)
                         await ctx.send(embed=embed)
                     else:
-                        await ctx.send('Device not found.')
+                        await ctx.send('Device not found!')
                 elif devices.status == 404:
-                    await ctx.send("Couldn't reach Bootleggers API.")
+                    await ctx.send("Couldn't reach Bootleggers API!")
 
 
 def setup(bot):
