@@ -49,12 +49,12 @@ async def on_ready():
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(title="Custom ROM Bot", description="Fetches the latest builds of "
-                                                                   "official devices", color=0x5eff72)
+                                                                   "officially supported devices", color=0x5eff72)
     embed.add_field(name="Available ROMs", value=f"{roms}", inline=False)
     embed.add_field(name="Usage:", value=f"`!<rom> <device>` \n"
                                          f"Example: `!evo tissot`\n"
                                          f"You can also view available ROMs with `{prefix}roms`.\n"
-                                         f"\nNote:\n"
+                                         f"\n**Note**:\n"
                                          f"Device codenames are case-sensitive. "
                                          f"By default, it should be all lowercase.\n"
                                          f"If the bot responds \"Device not found\","
@@ -63,8 +63,7 @@ async def help(ctx):
                                          f" your device is not officially supported by the ROM.", inline=False)
     embed.add_field(name="For Pixel Experience:", value="`!pe <device> <version>`\n"
                                                         "Versions: Oreo, Pie, Pie-CAF\n"
-                                                        "Example:\n"
-                                                        "`!pe tissot caf`", inline=False)
+                                                        "Example: `!pe tissot caf`", inline=False)
     embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
     try:
         await ctx.author.send(embed=embed)
