@@ -19,24 +19,24 @@ class CommandErrorHandler(commands.Cog):
         error = getattr(error, 'original', error)
         
         if isinstance(error, commands.CommandNotFound):
-            return await ctx.send(f'Command not found! View !roms.')
+            return await ctx.send(f'Command not found! Use `!roms` to see the available commands.')
 
         elif isinstance(error, commands.MissingRequiredArgument):
             print(error)
-            return await ctx.send(f'What device? It should be !{ctx.command} (device)')
+            return await ctx.send(f'What device? It should be `!{ctx.command} <device>`')
 
         elif isinstance(error, commands.DisabledCommand):
             return await ctx.send(f'{ctx.command} has been disabled.')
 
         elif isinstance(error, commands.NoPrivateMessage):
             try:
-                return await ctx.author.send(f'{ctx.command} can not be used in Private Messages.')
+                return await ctx.author.send(f'{ctx.command} cannot be used in private messages.')
             except:
                 pass
 
         elif isinstance(error, commands.BadArgument):
             if ctx.command.qualified_name == 'tag list':
-                return await ctx.send('I could not find that member. Please try again.')
+                return await ctx.send("Couldn't find this member. Please try again.")
             
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
