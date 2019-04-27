@@ -18,17 +18,17 @@ class CommandErrorHandler(commands.Cog):
 
         error = getattr(error, 'original', error)
         
-        #if isinstance(error, commands.CommandNotFound):
-            #return await ctx.send(f'Command not found! Use `!roms` to see available commands.')
+        if isinstance(error, commands.CommandNotFound):
+            return await ctx.send(f'Command not found! Use `!roms` to see available commands.')
 
-        #elif isinstance(error, commands.MissingRequiredArgument):
-            #print(error)
-            #return await ctx.send(f'What device? It should be `!{ctx.command} <device>`')
+        elif isinstance(error, commands.MissingRequiredArgument):
+            print(error)
+            return await ctx.send(f'What device? It should be `!{ctx.command} <device>`')
 
-        #elif isinstance(error, commands.DisabledCommand):
-            #return await ctx.send(f'`!{ctx.command}` has been disabled.')
+        elif isinstance(error, commands.DisabledCommand):
+            return await ctx.send(f'`!{ctx.command}` has been disabled.')
 
-        if isinstance(error, commands.NoPrivateMessage):
+        elif isinstance(error, commands.NoPrivateMessage):
             try:
                 return await ctx.author.send(f'`!{ctx.command}` cannot be used in private messages.')
             except:
