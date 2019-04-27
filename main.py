@@ -25,6 +25,7 @@ roms = 'DotOS (dotos)\n' \
        'LineageOS (lineage)\n' \
        'PixelExperience (pe) \n'
 
+
 @bot.event
 async def on_ready():
     print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
@@ -42,21 +43,6 @@ async def on_ready():
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n\t->{}'.format(extension, exc))
     print('Successfully loaded the following extension(s): {}'.format(loaded_extensions))
-
-
-@bot.command()
-async def help(ctx):
-    embed = discord.Embed(title="Custom ROM Bot help", description="Fetches latest builds from "
-                                                                   "official devices", color=0x5eff72)
-    embed.add_field(name="ROMs Available:", value=f"{roms}", inline=False)
-    embed.add_field(name="Usage:", value=f"!(rom) (device) \nExample: !evo tissot\nYou can also view available roms"
-                                         f" with {prefix}roms.\n", inline=False)
-    embed.add_field(name="For Pixel Experience:", value="!pe (device) (version)\n"
-                                                       "PE Versions: Oreo, Pie, Pie-CAF\n"
-                                                       "Example:\n"
-                                                       "!pe tissot caf", inline=False)
-    embed.set_footer(text="bot was made by Keikei14 | Keikei14#7950")
-    await ctx.send(embed=embed)
 
 
 @bot.command(name="roms")

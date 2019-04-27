@@ -19,7 +19,7 @@ class CommandErrorHandler(commands.Cog):
         error = getattr(error, 'original', error)
         
         if isinstance(error, commands.CommandNotFound):
-            return await ctx.send('Command not found! View !help.')
+            return await ctx.send(f'Command not found! View !roms.')
 
         elif isinstance(error, commands.MissingRequiredArgument):
             print(error)
