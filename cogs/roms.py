@@ -23,9 +23,9 @@ class ROMResolver(commands.Cog):
                         filesize = size(int(usr['response'][-1]['size']))
                         valued = f"**Build Date**: `{builddate}`\n" \
                                  f"**Size**: `{filesize}`\n" \
-                                 f"**Version**: `{usr['response'][-1]['version']}\n`" \
+                                 f"**Version**: `{usr['response'][-1]['version']}`\n" \
                                  f"**Download**: [{usr['response'][-1]['filename']}]({usr['response'][-1]['url']})"
-                        embed = discord.Embed(title="Potato Open Sauce Project | {device}",
+                        embed = discord.Embed(title=f"Potato Open Sauce Project | {device}",
                                               description=valued,
                                               color=embedcolor)
                         embed.set_footer(text=embedfooter)
@@ -47,7 +47,7 @@ class ROMResolver(commands.Cog):
                         f"**Size**: `{filesize}`\n" \
                         f"**Version**: `{usr['version']}`\n" \
                         f"**Download**: [{usr['filename']}]({usr['url']})"
-                    embed = discord.Embed(title="Evolution-X | {device}",
+                    embed = discord.Embed(title=f"Evolution-X | {device}",
                                           description=valued,
                                           color=embedcolor)
                     embed.set_footer(text=embedfooter)
@@ -65,9 +65,9 @@ class ROMResolver(commands.Cog):
                     builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
                     valued = f"**Build date**: `{builddate}`\n" \
                         f"**Size**: `{filesize}`\n" \
-                        f"**Version**: `{usr['response'][0]['version']}\n`" \
+                        f"**Version**: `{usr['response'][0]['version']}`\n" \
                         f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
-                    embed = discord.Embed(title="ViperOS | {device}",
+                    embed = discord.Embed(title=f"ViperOS | {device}",
                                           description=valued,
                                           color=embedcolor)
                     embed.set_footer(text=embedfooter)
@@ -85,9 +85,9 @@ class ROMResolver(commands.Cog):
                     builddate = date.fromtimestamp(usr['response'][0]['datetime'])
                     valued = f"**Build date**: `{builddate}`\n" \
                         f"**Size**: `{filesize}`\n" \
-                        f"**Version**: `{usr['response'][0]['version']}\n`" \
+                        f"**Version**: `{usr['response'][0]['version']}`\n" \
                         f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
-                    embed = discord.Embed(title="DotOS | {device}",
+                    embed = discord.Embed(title=f"DotOS | {device}",
                                           description=valued,
                                           color=embedcolor)
                     embed.set_footer(text=embedfooter)
@@ -107,7 +107,7 @@ class ROMResolver(commands.Cog):
                         f"**Size**: `{filesize}`\n" \
                         f"**Version**: `{usr['response'][0]['version']}`\n" \
                         f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
-                    embed = discord.Embed(title="PearlOS | {device}",
+                    embed = discord.Embed(title=f"PearlOS | {device}",
                                           description=valued,
                                           color=embedcolor)
                     embed.set_footer(text=embedfooter)
@@ -125,9 +125,9 @@ class ROMResolver(commands.Cog):
                     builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
                     valued = f"**Build date**: `{builddate}`\n" \
                              f"**Size**: `{filesize}`\n" \
-                             f"**Version**: `{usr['response'][0]['version']}\n`" \
+                             f"**Version**: `{usr['response'][0]['version']}`\n" \
                              f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
-                    embed = discord.Embed(title="PixysOS | {device}",
+                    embed = discord.Embed(title=f"PixysOS | {device}",
                                           description=valued,
                                           color=embedcolor)
                     embed.set_footer(text=embedfooter)
@@ -145,9 +145,9 @@ class ROMResolver(commands.Cog):
                     builddate = date.fromtimestamp(usr['response'][0]['datetime'])
                     valued = f"**Build date**: `{builddate}`\n" \
                              f"**Size**: `{filesize}`\n" \
-                             f"**Version**: `{usr['response'][0]['version']}\n`" \
+                             f"**Version**: `{usr['response'][0]['version']}`\n" \
                              f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
-                    embed = discord.Embed(title="HavocOS | {device}",
+                    embed = discord.Embed(title=f"HavocOS | {device}",
                                           description=valued,
                                           color=embedcolor)
                     embed.set_footer(text=embedfooter)
@@ -166,9 +166,9 @@ class ROMResolver(commands.Cog):
                         builddate = date.fromtimestamp(usr['response'][-1]['datetime'])
                         valued = f"**Build date**: `{builddate}`\n" \
                                  f"**Size**: `{filesize}`\n" \
-                                 f"**Version**: `{usr['response'][-1]['version']}\n`" \
+                                 f"**Version**: `{usr['response'][-1]['version']}`\n" \
                                  f"**Download**: [{usr['response'][-1]['filename']}]({usr['response'][-1]['url']})"
-                        embed = discord.Embed(title="LineageOS | {device}",
+                        embed = discord.Embed(title=f"LineageOS | {device}",
                                               description=valued,
                                               color=embedcolor)
                         embed.set_footer(text=embedfooter)
@@ -211,9 +211,9 @@ class ROMResolver(commands.Cog):
             builddate = date.fromtimestamp(usr['datetime'])
             valued = f"**Build date**: `{builddate}`\n" \
                      f"**Size**: `{filesize}`\n" \
-                     f"**Version**: `{usr['version']}\n`" \
+                     f"**Version**: `{usr['version']}`\n" \
                      f"**Download**: [{usr['filename']}]({usr['url']})"
-            embed = discord.Embed(title="Pixel Experience | {device}",
+            embed = discord.Embed(title=f"Pixel Experience | {device}",
                                   description=valued,
                                   color=embedcolor)
             embed.set_footer(text=embedfooter)
@@ -232,7 +232,7 @@ class ROMResolver(commands.Cog):
                         valued = f"**Build date**: `{usr[device]['buildate']}`\n" \
                                  f"**Size**: `{filesize}`\n" \
                                  f"**Download**: [{usr[device]['filename']}]({usr[device]['download']})"
-                        embed = discord.Embed(title="BootleggersROM | {device}",
+                        embed = discord.Embed(title=f"BootleggersROM | {device}",
                                               description=valued,
                                               color=embedcolor)
                         embed.set_footer(text=embedfooter)

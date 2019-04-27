@@ -15,16 +15,16 @@ loaded_extensions = []
 
 bot.remove_command("help")
 
-roms = 'DotOS (!dotos)\n' \
-       'Evolution-X (!evo)\n' \
-       'HavocOS (!havoc)\n' \
-       'PearlOS (!pearl)\n' \
-       'PixysOS (!pixy)\n' \
-       'Potato Open Sauce Project (!posp)\n' \
-       'ViperOS (!viper)\n' \
-       'LineageOS (!los/!lineage)\n' \
-       'Pixel Experience (!pe) \n' \
-       'BootleggersROM (!btlg/!bootleggers) \n'
+roms = 'DotOS (dotos)\n' \
+       'Evolution-X (evo)\n' \
+       'HavocOS (havoc)\n' \
+       'PearlOS (pearl)\n' \
+       'PixysOS (pixy)\n' \
+       'Potato Open Sauce Project (posp)\n' \
+       'ViperOS (viper)\n' \
+       'LineageOS (los/lineage)\n' \
+       'Pixel Experience (pe) \n' \
+       'BootleggersROM (btlg/bootleggers) \n'
 
 
 @bot.event
