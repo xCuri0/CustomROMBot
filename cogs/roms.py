@@ -27,7 +27,6 @@ class ROMResolver(commands.Cog):
             embed = discord.Embed(title="Potato Open Source Project Latest Build:",
                                   description=valued,
                                   color=embedcolor)
-            embed.add_field(name="Build info:", value=valued, inline=False)
             embed.set_footer(text=embedfooter)
             await ctx.send(embed=embed)
         else:
@@ -48,7 +47,6 @@ class ROMResolver(commands.Cog):
             embed = discord.Embed(title="Evolution-X Latest Build",
                                   description=valued,
                                   color=embedcolor)
-            embed.add_field(name="Build info:", value=valued)
             embed.set_footer(text=embedfooter)
             await ctx.send(embed=embed)
         elif fetch.status_code == 404:
