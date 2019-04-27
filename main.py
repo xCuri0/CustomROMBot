@@ -62,7 +62,7 @@ async def help(ctx):
                                          f"If it still responds with \"Device not found\", probably"
                                          f" your device is not officially supported by the ROM.", inline=False)
     embed.add_field(name="For Pixel Experience", value="`!pe <device> <version>`\n"
-                                                        "Versions: Oreo, Pie, Pie-CAF\n"
+                                                        "Versions: Oreo (oreo), Pie (pie), Pie-CAF (caf)\n"
                                                         "Example: `!pe tissot caf`", inline=False)
     embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
     try:
