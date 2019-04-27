@@ -213,13 +213,34 @@ class ROMResolver(commands.Cog):
                      f"Build date: {builddate}\n" \
                      f"Build size: {filesize}\n" \
                      f"Version: {usr['version']}"
-            embed = discord.Embed(title="PixelExperience Latest Build",
+            embed = discord.Embed(title="Pixel Experience Latest Build",
                                   description=valued,
                                   color=embedcolor)
             embed.set_footer(text=embedfooter)
             await ctx.send(embed=embed)
         elif usr['error']:
             await ctx.send("Device/Version not found!")
+
+    @commands.command(aliases=['btlg'])
+    async def bootleggers(self, ctx, device: str):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"https://bootleggersrom-devices.github.io/api/devices.json") as devices:
+                if devices.status == 200:
+                    usr = await devices.json()
+                    if device in usr:
+                        filesize = size(int(usr[device]['buildsize']))
+                        valued = f"[{usr[device]['filename']}]({usr[device]['download']})\n" \
+                                 f"Build date: {usr[device]['buildate']}\n" \
+                                 f"Build size: {filesize}\n"
+                        embed = discord.Embed(title="BootleggersROM Latest Build",
+                                              description=valued,
+                                              color=embedcolor)
+                        embed.set_footer(text=embedfooter)
+                        await ctx.send(embed=embed)
+                    else:
+                        await ctx.send('Device not found.')
+                elif devices.status == 404:
+                    await ctx.send('Could not reach Bootleggers API.')
 
 
 def setup(bot):

@@ -23,7 +23,8 @@ roms = 'DotOS (dotos)\n' \
        'Potato Open Sauce Project (posp)\n' \
        'ViperOS (viper)\n' \
        'LineageOS (lineage)\n' \
-       'PixelExperience (pe) \n'
+       'Pixel Experience (pe) \n' \
+       'BootleggersROM (btlg/bootleggers) \n'
 
 
 @bot.event
