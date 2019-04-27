@@ -13,8 +13,7 @@ class ROMResolver(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def posp(self, ctx, phone):
-        device = phone.lower()
+    async def posp(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
                 if fetch.status == 200:
@@ -37,8 +36,7 @@ class ROMResolver(commands.Cog):
                     await ctx.send('Device not found!')
 
     @commands.command()
-    async def evo(self, ctx, phone):
-        device = phone.lower()
+    async def evo(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/evolution-x/official_devices/master/builds/{device}.json') as fetch:
                 if fetch.status == 200:
@@ -58,8 +56,7 @@ class ROMResolver(commands.Cog):
                     await ctx.send("Device not found!")
 
     @commands.command()
-    async def viper(self, ctx, phone):
-        device = phone.lower()
+    async def viper(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/Viper-Devices/official_devices/master/{device}/build.json') as fetch:
                 if fetch.status == 200:
@@ -79,8 +76,7 @@ class ROMResolver(commands.Cog):
                     await ctx.send("Device not found!")
 
     @commands.command()
-    async def dotos(self, ctx, phone):
-        device = phone.lower()
+    async def dotos(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/DotOS/ota_config/dot-p/{device}.json') as fetch:
                 if fetch.status == 200:
@@ -100,8 +96,7 @@ class ROMResolver(commands.Cog):
                     return await ctx.send("Device not found!")
 
     @commands.command()
-    async def pearl(self, ctx, phone):
-        device = phone.lower()
+    async def pearl(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/PearlOS/OTA/master/{device}.json') as fetch:
                 if fetch.status == 200:
@@ -121,8 +116,7 @@ class ROMResolver(commands.Cog):
                     return await ctx.send("Device not found!")
 
     @commands.command()
-    async def pixy(self, ctx, phone):
-        device = phone.lower()
+    async def pixy(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/PixysOS-Devices/official_devices/master/{device}/build.json') as fetch:
                 if fetch.status == 200:
@@ -142,8 +136,7 @@ class ROMResolver(commands.Cog):
                     await ctx.send("Device not found!")
 
     @commands.command()
-    async def havoc(self, ctx, phone):
-        device = phone.lower()
+    async def havoc(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json') as fetch:
                 if fetch.status == 200:
@@ -163,8 +156,7 @@ class ROMResolver(commands.Cog):
                     await ctx.send("Device not found!")
 
     @commands.command()
-    async def lineage(self, ctx, phone):
-        device = phone.lower()
+    async def lineage(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://download.lineageos.org/api/v1/{device}/nightly/*') as fetch:
                 if fetch.status == 200:
@@ -187,8 +179,7 @@ class ROMResolver(commands.Cog):
                     await ctx.send('Device not found!')
 
     @commands.command()
-    async def pe(self, ctx, phone, peversion=None):
-        device = phone.lower()
+    async def pe(self, ctx, device, peversion=None):
         if peversion is None:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie') as fetch:
