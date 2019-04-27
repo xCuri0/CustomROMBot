@@ -47,7 +47,15 @@ async def on_ready():
 
 @bot.command(name="roms")
 async def romcommand(ctx):
-    embed = discord.Embed(title="ROMs Available:", description=f"{roms}", color=0x5eff72)
+    embed = discord.Embed(title="Custom ROM Bot help", description="Fetches latest builds from "
+                                                                   "official devices", color=0x5eff72)
+    embed.add_field(name="ROMs Available:", value=f"{roms}", inline=False)
+    embed.add_field(name="Usage:", value=f"!(rom) (device) \nExample: !evo tissot\nYou can also view available roms"
+                                         f" with {prefix}roms.\n", inline=False)
+    embed.add_field(name="For Pixel Experience:", value="!pe (device) (version)\n"
+                                                       "PE Versions: Oreo, Pie, Pie-CAF\n"
+                                                       "Example:\n"
+                                                       "!pe tissot caf", inline=False)
     embed.set_footer(text="bot was made by Keikei14 | Keikei14#7950")
     await ctx.send(embed=embed)
 
