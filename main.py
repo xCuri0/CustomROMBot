@@ -48,7 +48,7 @@ async def on_ready():
 
 @bot.command(name="roms")
 async def romcommand(ctx):
-    embed = discord.Embed(title="Custom ROM Bot help", description="Fetches the latest builds of "
+    embed = discord.Embed(title="Custom ROM Bot", description="Fetches the latest builds of "
                                                                    "official devices", color=0x5eff72)
     embed.add_field(name="Available ROMs", value=f"{roms}", inline=False)
     embed.add_field(name="Usage:", value=f"!<rom> <device> \n"
