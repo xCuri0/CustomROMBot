@@ -69,7 +69,7 @@ async def help(ctx):
     try:
         await ctx.author.send(embed=embed)
     except:
-        pass
+        await ctx.send(f'Oh no! I can\'t DM {ctx.author.name}!')
 
 
 @bot.command(name='roms')
