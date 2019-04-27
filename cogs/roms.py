@@ -1,6 +1,11 @@
 from discord.ext import commands
 from requests import get
 from hurry.filesize import size
+import discord
+from datetime import date
+
+embedcolor = 0x5eff72
+embedfooter = "bot was made by Keikei14 | Keikei14#7950"
 
 
 class ROMResolver(commands.Cog):
@@ -13,29 +18,20 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly')
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
+            builddate = date.fromtimestamp(usr['response'][-1]['datetime'])
             filesize = size(int(usr['response'][-1]['size']))
-            reply_text = f"**Download:** `{usr['response'][-1]['filename']}`\n" \
-                         f"**URL:** <{usr['response'][-1]['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Version:** `{usr['response'][-1]['version']}`"
-            await ctx.send(reply_text)
+            valued = f"[{usr['response'][-1]['filename']}]({usr['response'][-1]['url']})\n" \
+                     f"Build Date: {builddate}\n" \
+                     f"Build Size: {filesize}\n" \
+                     f"Version: {usr['response'][-1]['version']}"
+            embed = discord.Embed(title="Potato Open Source Project Latest Build:",
+                                  description=valued,
+                                  color=embedcolor)
+            embed.add_field(name="Build info:", value=valued, inline=False)
+            embed.set_footer(text=embedfooter)
+            await ctx.send(embed=embed)
         else:
             await ctx.send('Device not found!')
-
-    @commands.command()
-    async def posptest(self, ctx, phone):
-        device = phone.lower()
-        fetch = get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=mashed')
-        if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
-            usr = fetch.json()
-            filesize = size(int(usr['response'][-1]['size']))
-            reply_text = f"**Download:** {usr['response'][-1]['filename']}\n" \
-                         f"**URL:** <{usr['response'][-1]['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Version:** `{usr['response'][-1]['version']}`"
-            await ctx.send(reply_text)
-        else:
-            ctx.send('Device not found!')
 
     @commands.command()
     async def evo(self, ctx, phone):
@@ -44,13 +40,17 @@ class ROMResolver(commands.Cog):
         if fetch.status_code == 200:
             usr = fetch.json()
             filesize = size(int(usr['size']))
-            reply_text = f"**Download:** `{usr['filename']}`\n" \
-                         f"**URL:** <{usr['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Android Version:** `{usr['version']}`\n" \
-                         f"**Maintainer:** {usr['maintainer']}: <{usr['maintainer_url']}>\n" \
-                         f"**XDA Thread:** <{usr['forum_url']}>"
-            await ctx.send(reply_text)
+            builddate = date.fromtimestamp(usr['datetime'])
+            valued = f"[{usr['filename']}]({usr['url']})\n" \
+                     f"Build date: {builddate}\n" \
+                     f"Build Size: {filesize}\n" \
+                     f"Version: {usr['version']}"
+            embed = discord.Embed(title="Evolution-X Latest Build",
+                                  description=valued,
+                                  color=embedcolor)
+            embed.add_field(name="Build info:", value=valued)
+            embed.set_footer(text=embedfooter)
+            await ctx.send(embed=embed)
         elif fetch.status_code == 404:
             await ctx.send("Device not found!")
 
@@ -61,13 +61,18 @@ class ROMResolver(commands.Cog):
         if fetch.status_code == 200:
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
-            reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** <{usr['response'][0]['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Version:** `{usr['response'][0]['version']}`\n"
+            builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
+            valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
+                     f"Build date: {builddate}\n" \
+                     f"Build size: {filesize}\n" \
+                     f"Version: {usr['response'][0]['version']}"
+            embed = discord.Embed(title="ViperOS Latest Build:",
+                                  description=valued,
+                                  color=embedcolor)
+            embed.set_footer(text=embedfooter)
+            await ctx.send(embed=embed)
         elif fetch.status_code == 404:
-            reply_text = 'Device not found!'
-        await ctx.send(reply_text)
+            await ctx.send("Device not found!")
 
     @commands.command()
     async def dotos(self, ctx, phone):
@@ -76,13 +81,18 @@ class ROMResolver(commands.Cog):
         if fetch.status_code == 200:
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
-            reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** <{usr['response'][0]['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Version:** `{usr['response'][0]['version']}`\n"
+            builddate = date.fromtimestamp(usr['response'][0]['datetime'])
+            valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
+                     f"Build date: {builddate}\n" \
+                     f"Build size: {filesize}\n" \
+                     f"Version: {usr['response'][0]['version']}"
+            embed = discord.Embed(title="DotOS Latest Build:",
+                                  description=valued,
+                                  color=embedcolor)
+            embed.set_footer(text=embedfooter)
+            await ctx.send(embed=embed)
         elif fetch.status_code == 404:
-            reply_text = 'Device not found!'
-        await ctx.send(reply_text)
+            await ctx.send("Device not found!")
 
     @commands.command()
     async def pearl(self, ctx, phone):
@@ -91,14 +101,18 @@ class ROMResolver(commands.Cog):
         if fetch.status_code == 200:
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
-            reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** <{usr['response'][0]['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Version:** `{usr['response'][0]['version']}`\n" \
-                         f"**XDA Thread:** <{usr['response'][0]['xda']}>"
+            builddate = date.fromtimestamp(usr['response'][0]['datetime'])
+            valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
+                     f"Build date: {builddate}\n" \
+                     f"Build size: {filesize}\n" \
+                     f"Version: {usr['response'][0]['version']}"
+            embed = discord.Embed(title="PearlOS Latest Build:",
+                                  description=valued,
+                                  color=embedcolor)
+            embed.set_footer(text=embedfooter)
+            await ctx.send(embed=embed)
         elif fetch.status_code == 404:
-            reply_text = 'Device not found!'
-        await ctx.send(reply_text)
+            await ctx.send("Device not found!")
 
     @commands.command()
     async def pixy(self, ctx, phone):
@@ -107,13 +121,18 @@ class ROMResolver(commands.Cog):
         if fetch.status_code == 200:
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
-            reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** <{usr['response'][0]['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Version:** `{usr['response'][0]['version']}`\n"
+            builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
+            valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
+                     f"Build date: {builddate}\n" \
+                     f"Build size: {filesize}\n" \
+                     f"Version: {usr['response'][0]['version']}"
+            embed = discord.Embed(title="PixysOS Latest Build",
+                                  description=valued,
+                                  color=embedcolor)
+            embed.set_footer(text=embedfooter)
+            await ctx.send(embed=embed)
         elif fetch.status_code == 404:
-            reply_text = 'Device not found!'
-        await ctx.send(reply_text)
+            await ctx.send("Device not found!")
 
     @commands.command()
     async def havoc(self, ctx, phone):
@@ -122,13 +141,18 @@ class ROMResolver(commands.Cog):
         if fetch.status_code == 200:
             usr = fetch.json()
             filesize = size(int(usr['response'][0]['size']))
-            reply_text = f"**Download:** `{usr['response'][0]['filename']}`\n" \
-                         f"**URL:** <{usr['response'][0]['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Version:** `{usr['response'][0]['version']}`\n"
+            builddate = date.fromtimestamp(usr['response'][0]['datetime'])
+            valued = f"[{usr['response'][0]['filename']}]({usr['response'][0]['url']})\n" \
+                     f"Build date: {builddate}\n" \
+                     f"Build size: {filesize}\n" \
+                     f"Version: {usr['response'][0]['version']}"
+            embed = discord.Embed(title="HavocOS Latest Build",
+                                  description=valued,
+                                  color=embedcolor)
+            embed.set_footer(text=embedfooter)
+            await ctx.send(embed=embed)
         elif fetch.status_code == 404:
-            reply_text = 'Device not found!'
-        await ctx.send(reply_text)
+            await ctx.send("Device not found!")
 
     @commands.command()
     async def lineage(self, ctx, phone):
@@ -136,13 +160,17 @@ class ROMResolver(commands.Cog):
         fetch = get(f'https://download.lineageos.org/api/v1/{device}/nightly/*')
         if fetch.status_code == 200 and str(fetch.json()['response']) != "[]":
             usr = fetch.json()
-            filesize = size(int(usr['response'][-1]['size']))
-            reply_text = f"**Download:** `{usr['response'][-1]['filename']}`\n" \
-                         f"**URL:** <{usr['response'][-1]['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Version:** `{usr['response'][-1]['version']}`\n" \
-                         f"**Type:** {usr['response'][-1]['romtype']}"
-            await ctx.send(reply_text)
+            filesize = size(usr['response'][0]['size'])
+            builddate = date.fromtimestamp(usr['response'][-1]['datetime'])
+            valued = f"[{usr['response'][-1]['filename']}]({usr['response'][-1]['url']})\n" \
+                     f"Build date: {builddate}\n" \
+                     f"Build size: {filesize}\n" \
+                     f"Version: {usr['response'][-1]['version']}"
+            embed = discord.Embed(title="LineageOS Latest Build",
+                                  description=valued,
+                                  color=embedcolor)
+            embed.set_footer(text=embedfooter)
+            await ctx.send(embed=embed)
         else:
             await ctx.send('Device not found!')
 
@@ -161,15 +189,17 @@ class ROMResolver(commands.Cog):
             return await ctx.send('Device/Version not found!')
         usr = fetch.json()
         if not usr['error']:
-            filesize = size(int(usr['size']))
-            reply_text = f"**Download:** `{usr['filename']}`\n" \
-                         f"**URL:** <{usr['url']}>\n" \
-                         f"**Size:** `{filesize}`\n" \
-                         f"**Version:** `{usr['version']}`\n" \
-                         f"**Forum URL:** <{usr['forum_url']}>\n" \
-                         f"**Maintainer:** {usr['maintainer']}\n" \
-                         f"**Maintainer URL:** <{usr['maintainer_url']}>"
-            await ctx.send(reply_text)
+            filesize = size(usr['size'])
+            builddate = date.fromtimestamp(usr['datetime'])
+            valued = f"[{usr['filename']}]({usr['url']})\n" \
+                     f"Build date: {builddate}\n" \
+                     f"Build size: {filesize}\n" \
+                     f"Version: {usr['version']}"
+            embed = discord.Embed(title="PixelExperience Latest Build",
+                                  description=valued,
+                                  color=embedcolor)
+            embed.set_footer(text=embedfooter)
+            await ctx.send(embed=embed)
         elif usr['error']:
             await ctx.send("Device/Version not found!")
 
