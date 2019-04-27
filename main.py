@@ -51,8 +51,8 @@ async def romcommand(ctx):
     embed = discord.Embed(title="Custom ROM Bot", description="Fetches the latest builds of "
                                                                    "official devices", color=0x5eff72)
     embed.add_field(name="Available ROMs", value=f"{roms}", inline=False)
-    embed.add_field(name="Usage:", value=f"!<rom> <device> \n"
-                                         f"Example: !evo tissot\n"
+    embed.add_field(name="Usage:", value=f"`!<rom> <device>` \n"
+                                         f"Example: `!evo tissot`\n"
                                          f"You can also view available ROMs with `{prefix}roms`.\n"
                                          f"\nNote:\n"
                                          f"Device codenames are case-sensitive. "
@@ -61,10 +61,10 @@ async def romcommand(ctx):
                                          f" try having it all uppercase.\n"
                                          f"If it still responds with \"Device not found\", probably"
                                          f" your device is not officially supported by the ROM.", inline=False)
-    embed.add_field(name="For Pixel Experience:", value="!pe <device> <version>\n"
+    embed.add_field(name="For Pixel Experience:", value="`!pe <device> <version>`\n"
                                                         "Versions: Oreo, Pie, Pie-CAF\n"
                                                         "Example:\n"
-                                                        "!pe tissot caf", inline=False)
+                                                        "`!pe tissot caf`", inline=False)
     embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
     await ctx.send(embed=embed)
 

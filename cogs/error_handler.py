@@ -26,11 +26,11 @@ class CommandErrorHandler(commands.Cog):
             return await ctx.send(f'What device? It should be `!{ctx.command} <device>`')
 
         elif isinstance(error, commands.DisabledCommand):
-            return await ctx.send(f'{ctx.command} has been disabled.')
+            return await ctx.send(f'`!{ctx.command}` has been disabled.')
 
         elif isinstance(error, commands.NoPrivateMessage):
             try:
-                return await ctx.author.send(f'{ctx.command} cannot be used in private messages.')
+                return await ctx.author.send(f'`!{ctx.command}` cannot be used in private messages.')
             except:
                 pass
 
