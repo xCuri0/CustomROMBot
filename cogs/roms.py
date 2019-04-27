@@ -197,6 +197,10 @@ class ROMResolver(commands.Cog):
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie_caf') as fetch:
                     usr = await fetch.json()
+        elif peversion.lower() == 'pie-caf':
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie_caf') as fetch:
+                    usr = await fetch.json()
         elif peversion.lower() == 'pie_caf':
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie_caf') as fetch:
@@ -204,6 +208,10 @@ class ROMResolver(commands.Cog):
         elif peversion.lower() == 'oreo':
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/oreo') as fetch:
+                    usr = await fetch.json()
+        elif peversion.lower() == 'pie':
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie') as fetch:
                     usr = await fetch.json()
         else:
             return await ctx.send('Device/Version not found!')
