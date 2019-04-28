@@ -24,7 +24,8 @@ roms = 'DotOS (dotos)\n' \
        'ViperOS (viper)\n' \
        'LineageOS (los/lineage)\n' \
        'Pixel Experience (pe) \n' \
-       'BootleggersROM (btlg/bootleggers) \n'
+       'BootleggersROM (btlg/bootleggers) \n' \
+       'AOSP Extended (aex) \n'
 
 
 @bot.event
@@ -49,21 +50,15 @@ async def on_ready():
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(title="Custom ROM Bot", description="Fetches the latest builds of "
-                                                                   "officially supported devices", color=0x5eff72)
+                                                              "officially supported devices", color=0x5eff72)
     embed.add_field(name="Available ROMs", value=f"{roms}", inline=False)
     embed.add_field(name="Usage", value=f"`!<rom> <device>` \n"
                                          f"Example: `!evo tissot`\n"
                                          f"You can also view available ROMs with `{prefix}roms`.\n"
-                                         f"\n**Note**:\n"
-                                         f"Device codenames are case-sensitive. "
-                                         f"By default, it should be all lowercase.\n"
-                                         f"If the bot responds \"Device not found\","
-                                         f" try having it all uppercase.\n"
-                                         f"If it still responds with \"Device not found\", probably"
-                                         f" your device is not officially supported by the ROM.", inline=False)
+                                         , inline=False)
     embed.add_field(name="For Pixel Experience", value="`!pe <device> <version>`\n"
-                                                        "Versions: Oreo (oreo), Pie (pie), Pie-CAF (caf)\n"
-                                                        "Example: `!pe tissot caf`", inline=False)
+                                                       "Versions: Oreo (oreo), Pie (pie), Pie-CAF (caf)\n"
+                                                       "Example: `!pe tissot caf`", inline=False)
     embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
     try:
         await ctx.author.send(embed=embed)
