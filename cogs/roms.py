@@ -402,6 +402,8 @@ class ROMResolver(commands.Cog):
 
     @commands.command(name="roms")
     async def devicechecker(self, ctx, device=None):
+        if "@everyone" in ctx.message.content or "@here" in ctx.message.content or ctx.message.mention_everyone:
+            return await ctx.send('NO EVERYONE-ING HERE!')
         reply_text = ''
         if device is None:
             embed = discord.Embed(title="Available ROMs", description=f"{roms}", color=0x5eff72)
@@ -410,15 +412,21 @@ class ROMResolver(commands.Cog):
         elif device is not None:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://api.aospextended.com/ota/{device}/pie)') as fetch:
-                    usr = await fetch.json(content_type=None)
-                    if str(usr['error']) != 'true':
-                        reply_text += 'AEX (Pie)\n'
+                    if fetch.status == 200:
+                        usr = await fetch.json()
+                        if str(usr['error']) != 'true':
+                            reply_text += 'AEX (Pie)\n'
+                        else:
+                            pass
                     else:
                         pass
                 async with session.get(f'https://api.aospextended.com/ota/{device}/oreo)') as fetch:
-                    usr = await fetch.json(content_type=None)
-                    if str(usr['error']) != 'true':
-                        reply_text += 'AEX (Oreo)\n'
+                    if fetch.status == 200:
+                        usr = await fetch.json()
+                        if str(usr['error']) != 'true':
+                            reply_text += 'AEX (Oreo)\n'
+                        else:
+                            pass
                     else:
                         pass
                 async with session.get('https://bootleggersrom-devices.github.io/api/devices.json') as devices:
@@ -453,9 +461,12 @@ class ROMResolver(commands.Cog):
                     else:
                         pass
                 async with session.get(f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json') as fetch:
-                    usr = await fetch.json(content_type=None)
-                    if fetch.status == 200 and str(usr['response'] != '[]'):
-                        reply_text += 'HavocOS\n'
+                    if fetch.status == 200:
+                        usr = await fetch.json()
+                        if str(usr['response']) != '[]':
+                            reply_text += 'HavocOS\n'
+                        else:
+                            pass
                     else:
                         pass
                 async with session.get(
@@ -494,13 +505,14 @@ class ROMResolver(commands.Cog):
                         reply_text += "Potato Open Sauce Project"
                     else:
                         pass
-                embed = discord.Embed(title=f"Available ROMs for {device:}",
+            if reply_text != '':
+                embed = discord.Embed(title=f"Available ROMs for {device}",
                                       description=reply_text,
                                       color=embedcolor)
                 embed.set_footer(text=embedfooter)
                 await ctx.send(embed=embed)
-        elif reply_text == '':
-            await ctx.send('No available supported ROMs for device :(')
+            elif reply_text == '':
+                await ctx.send('No available supported ROMs for device :(')
 
 
 def setup(bot):
