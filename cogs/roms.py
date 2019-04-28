@@ -462,7 +462,7 @@ class ROMResolver(commands.Cog):
                         pass
                 async with session.get(f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json') as fetch:
                     if fetch.status == 200:
-                        usr = await fetch.json()
+                        usr = await fetch.json(content_type=None)
                         if str(usr['response']) != '[]':
                             reply_text += 'HavocOS\n'
                         else:
