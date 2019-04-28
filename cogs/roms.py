@@ -43,7 +43,7 @@ class ROMResolver(commands.Cog):
     async def getaex(self, ctx, device, version):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.aospextended.com/ota/{device}/{version}') as fetch:
-                usr = await fetch.json()
+                usr = await fetch.json(content_type=None)
                 if usr['error']:
                     return await ctx.send('No builds for device :(')
                 elif not usr['error']:
@@ -412,7 +412,7 @@ class ROMResolver(commands.Cog):
         elif device is not None:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://api.aospextended.com/ota/{device}/pie)') as fetch:
-                    if fetch.status == 200:
+                    if fetch.status == 200 or fetch.status == 403:
                         usr = await fetch.json()
                         if str(usr['error']) != 'true':
                             reply_text += 'AEX (Pie)\n'
@@ -420,8 +420,8 @@ class ROMResolver(commands.Cog):
                             pass
                     else:
                         pass
-                async with session.get(f'https://api.aospextended.com/ota/{device}/oreo)') as fetch:
-                    if fetch.status == 200:
+                async with session.get(f'https://api.aospextended.com/ota/{device}/oreo') as fetch:
+                    if fetch.status == 200 or fetch.status == 403:
                         usr = await fetch.json()
                         if str(usr['error']) != 'true':
                             reply_text += 'AEX (Oreo)\n'
