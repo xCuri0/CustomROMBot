@@ -66,11 +66,4 @@ async def help(ctx):
         await ctx.send(f'Oh no! I can\'t DM {ctx.author.name}!')
 
 
-@bot.command(name='roms')
-async def romcommand(ctx):
-    embed = discord.Embed(title="Available ROMs", description=f"{roms}", color=0x5eff72)
-    embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
-    await ctx.send(embed=embed)
-
-
 bot.run(private_stuff.token, bot=True, reconnect=True)
