@@ -40,7 +40,7 @@ class ROMResolver(commands.Cog):
                     valued = f"**Build date**: `{usr['build_date']}`\n" \
                              f"**Size**: `{filesize}`\n" \
                              f"**Download**: [{usr['filename']}]({usr['url']})"
-                    embed = discord.Embed(title=f"BootleggersROM | {device}",
+                    embed = discord.Embed(title=f"AEX | {device}",
                                           description=valued,
                                           color=embedcolor)
                     embed.set_footer(text=embedfooter)
