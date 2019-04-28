@@ -411,10 +411,10 @@ class ROMResolver(commands.Cog):
             await ctx.send(embed=embed)
         elif device is not None:
             async with aiohttp.ClientSession() as session:
-                async with session.get(f'https://api.aospextended.com/ota/{device}/pie)') as fetch:
+                async with session.get(f'https://api.aospextended.com/ota/{device}/pie') as fetch:
                     if fetch.status == 200 or fetch.status == 403:
                         usr = await fetch.json()
-                        if str(usr['error']) != 'true':
+                        if str(usr['error']) == 'false':
                             reply_text += 'AEX (Pie)\n'
                         else:
                             pass
@@ -423,7 +423,7 @@ class ROMResolver(commands.Cog):
                 async with session.get(f'https://api.aospextended.com/ota/{device}/oreo') as fetch:
                     if fetch.status == 200 or fetch.status == 403:
                         usr = await fetch.json()
-                        if str(usr['error']) != 'true':
+                        if str(usr['error']) == 'false':
                             reply_text += 'AEX (Oreo)\n'
                         else:
                             pass
