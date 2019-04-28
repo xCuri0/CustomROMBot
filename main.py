@@ -55,6 +55,7 @@ async def help(ctx):
     embed.add_field(name="Usage", value=f"`!<rom> <device>` \n"
                                          f"Example: `!evo tissot`\n"
                                          f"You can also view available ROMs with `{prefix}roms (device)`.\n"
+                                         f"To view the list of supported ROMs, use `{prefix}roms`.\n"
                                          , inline=False)
     embed.add_field(name="For Pixel Experience", value="`!pe <device> <version>`\n"
                                                        "Versions: Oreo (oreo), Pie (pie), Pie-CAF (caf)\n"
