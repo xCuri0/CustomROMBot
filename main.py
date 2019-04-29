@@ -51,11 +51,10 @@ async def on_ready():
 async def help(ctx):
     embed = discord.Embed(title="Custom ROM Bot", description="Fetches the latest builds of "
                                                               "officially supported devices", color=0x5eff72)
-    embed.add_field(name="Available ROMs", value=f"{roms}", inline=False)
+    embed.add_field(name="Available ROMs", value=f"{roms}\nYou can also view available ROMs with `{prefix}roms`.", inline=False)
     embed.add_field(name="Usage", value=f"`!<rom> <device>` \n"
                                          f"Example: `!evo tissot`\n"
-                                         f"You can also view available ROMs with `{prefix}roms (device)`.\n"
-                                         f"To view the list of supported ROMs, use `{prefix}roms`.\n"
+                                         f"To see available ROMs for a device, use `{prefix}roms <device>`.\n"
                                          , inline=False)
     embed.add_field(name="For Pixel Experience", value="`!pe <device> <version>`\n"
                                                        "Versions: Oreo (oreo), Pie (pie), Pie-CAF (caf)\n"
