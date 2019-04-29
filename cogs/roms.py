@@ -412,21 +412,15 @@ class ROMResolver(commands.Cog):
         elif device is not None:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://api.aospextended.com/ota/{device}/pie') as fetch:
-                    if fetch.status == 200 or fetch.status == 403:
-                        usr = await fetch.json()
-                        if str(usr['error']) == 'false':
-                            reply_text += 'AEX (Pie)\n'
-                        else:
-                            pass
+                    usr = await fetch.json(content_type=None)
+                    if not usr['error']:
+                        reply_text += 'AEX (Pie)\n'
                     else:
                         pass
                 async with session.get(f'https://api.aospextended.com/ota/{device}/oreo') as fetch:
-                    if fetch.status == 200 or fetch.status == 403:
-                        usr = await fetch.json()
-                        if str(usr['error']) == 'false':
-                            reply_text += 'AEX (Oreo)\n'
-                        else:
-                            pass
+                    usr = await fetch.json(content_type=None)
+                    if not usr['error']:
+                        reply_text += 'AEX (Oreo)\n'
                     else:
                         pass
                 async with session.get('https://bootleggersrom-devices.github.io/api/devices.json') as devices:
@@ -436,6 +430,8 @@ class ROMResolver(commands.Cog):
                             reply_text += 'BootleggersROM\n'
                         else:
                             pass
+                    else:
+                        pass
                 async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie') as fetch:
                     usr = await fetch.json()
                     if fetch.status == 200 and not usr['error']:
