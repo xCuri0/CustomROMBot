@@ -30,9 +30,7 @@ class ROMResolver(commands.Cog):
                 if device not in usr:
                     await ctx.send('No builds for device :(')
                 elif device in usr:
-                    filesize = size(int(usr[device]['buildsize']))
                     valued = f"**Build date**: `{usr[device]['buildate']}`\n" \
-                             f"**Size**: `{filesize}`\n" \
                              f"**Download**: [{usr[device]['filename']}]({usr[device]['download']})"
                     embed = discord.Embed(title=f"BootleggersROM | {device}",
                                           description=valued,
