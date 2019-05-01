@@ -1,3 +1,4 @@
 discord.py[voice]
 hurry.filesize
 aiohttp
+lxml
