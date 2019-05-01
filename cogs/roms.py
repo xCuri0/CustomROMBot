@@ -3,6 +3,8 @@ from hurry.filesize import size
 import discord
 from datetime import date
 import aiohttp
+import lxml
+from bs4 import BeautifulSoup
 
 embedcolor = 0x5eff72
 embedfooter = "Bot by Keikei14 | Keikei14#7950"
@@ -22,6 +24,25 @@ roms = 'DotOS (dotos)\n' \
 class ROMResolver(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    async def getcrdroid(self, ctx, device):
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://raw.githubusercontent.com/crdroidandroid/android_vendor_crDroidOTA/9.0/update.xml') as fetch:
+                if fetch.status == 200:
+                    fetchawait = await fetch.read()
+                    soup = BeautifulSoup(fetchawait.decode('utf-8'), features="lxml")
+                    finddevice = soup.find(device)
+                    if finddevice is not None:
+                        valued = f"**Download**: [{finddevice.filename.contents[0]}]({finddevice.download.contents[0]})"
+                        embed = discord.Embed(title=f"crDroid | {device}",
+                                              description=valued,
+                                              color=embedcolor)
+                        embed.set_footer(text=embedfooter)
+                        await ctx.send(embed=embed)
+                    elif finddevice is None:
+                        await ctx.send('Cannot find device.')
+                else:
+                    return ctx.send('Cannot connect to crDroid servers.')
 
     async def getbtlg(self, ctx, device):
         async with aiohttp.ClientSession() as session:
@@ -398,6 +419,23 @@ class ROMResolver(commands.Cog):
                     device = phone.upper()
                     await self.getaex(ctx, device, version)
 
+    @commands.command()
+    async def crdroid(self, ctx, phone: str):
+        device = phone.lower()
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://raw.githubusercontent.com/crdroidandroid/android_vendor_crDroidOTA/9.0/update.xml') as fetch:
+                if fetch.status == 200:
+                    fetchawait = await fetch.read()
+                    soup = BeautifulSoup(fetchawait.decode('utf-8'), features="lxml")
+                    finddevice = soup.find(device)
+                    if finddevice is not None:
+                        await self.getcrdroid(ctx, device)
+                    elif finddevice is None:
+                        device = phone.upper()
+                        await self.getcrdroid(ctx, device)
+                else:
+                    ctx.send('Cannot connect to crDroid servers.')
+
     @commands.command(name="roms")
     async def devicechecker(self, ctx, device=None):
         if "@everyone" in ctx.message.content or "@here" in ctx.message.content or ctx.message.mention_everyone:
@@ -496,7 +534,16 @@ class ROMResolver(commands.Cog):
                     f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
                     usr = await fetch.json()
                     if fetch.status == 200 and str(usr['response']) != '[]':
-                        reply_text += "Potato Open Sauce Project"
+                        reply_text += "Potato Open Sauce Project \n"
+                    else:
+                        pass
+                async with session.get(
+                        'https://raw.githubusercontent.com/crdroidandroid/android_vendor_crDroidOTA/9.0/update.xml') as fetch:
+                    fetchawait = await fetch.read()
+                    soup = BeautifulSoup(fetchawait.decode('utf-8'), features="lxml")
+                    finddevice = soup.find(device)
+                    if finddevice is not None:
+                        reply_text += 'crDroid'
                     else:
                         pass
             if reply_text != '':
