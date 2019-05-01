@@ -26,7 +26,7 @@ roms = 'DotOS (dotos)\n' \
        'Pixel Experience (pe) \n' \
        'BootleggersROM (btlg/bootleggers) \n' \
        'AOSP Extended (aex) \n' \
-       'crDroid \n'
+       'crDroid (crdroid)\n'
 
 
 @bot.event
@@ -57,9 +57,10 @@ async def help(ctx):
                                          f"Example: `!evo tissot`\n"
                                          f"To see available ROMs for a device, use `{prefix}roms <device>`.\n"
                                          , inline=False)
-    embed.add_field(name="For Pixel Experience", value="`!pe <device> <version>`\n"
-                                                       "Versions: Oreo (oreo), Pie (pie), Pie-CAF (caf)\n"
-                                                       "Example: `!pe tissot caf`", inline=False)
+    embed.add_field(name="For Pixel Experience and AEX", value="`!pe <device> <version>`\n"
+                                                               "Versions: Oreo (oreo), Pie (pie), "
+                                                               "Pie-CAF (caf) (exclusive to PE)\n"
+                                                               "Example: `!pe tissot oreo`", inline=False)
     embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
     try:
         await ctx.author.send(embed=embed)
