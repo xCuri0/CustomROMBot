@@ -18,7 +18,8 @@ roms = 'DotOS (dotos)\n' \
        'LineageOS (los/lineage)\n' \
        'Pixel Experience (pe) \n' \
        'BootleggersROM (btlg/bootleggers) \n' \
-       'AOSP Extended (aex) \n'
+       'AOSP Extended (aex) \n' \
+       'crDroid \n'
 
 
 class ROMResolver(commands.Cog):
