@@ -41,16 +41,16 @@ class ROMResolver(commands.Cog):
                         embed.set_footer(text=embedfooter)
                         await ctx.send(embed=embed)
                     elif finddevice is None:
-                        await ctx.send('Cannot find device.')
+                        await ctx.send('Cannot find device. <:harold:498881491368017930>')
                 else:
-                    return ctx.send('Cannot connect to crDroid servers.')
+                    return ctx.send('Cannot connect to crDroid servers. <:harold:498881491368017930>')
 
     async def getbtlg(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f"https://bootleggersrom-devices.github.io/api/devices.json") as devices:
                 usr = await devices.json()
                 if device not in usr:
-                    await ctx.send('No builds for device :(')
+                    await ctx.send('No builds for device. <:harold:498881491368017930>')
                 elif device in usr:
                     valued = f"**Build date**: `{usr[device]['buildate']}`\n" \
                              f"**Download**: [{usr[device]['filename']}]({usr[device]['download']})"
@@ -65,7 +65,7 @@ class ROMResolver(commands.Cog):
             async with session.get(f'https://api.aospextended.com/ota/{device}/{version}') as fetch:
                 usr = await fetch.json(content_type=None)
                 if usr['error']:
-                    return await ctx.send('No builds for device :(')
+                    return await ctx.send('No builds for device. <:harold:498881491368017930>')
                 elif not usr['error']:
                     filesize = size(usr['filesize'])
                     valued = f"**Build date**: `{usr['build_date']}`\n" \
@@ -94,7 +94,7 @@ class ROMResolver(commands.Cog):
                     embed.set_footer(text=embedfooter)
                     await ctx.send(embed=embed)
                 elif usr['error']:
-                    await ctx.send(f"No builds for device :(")
+                    await ctx.send(f"No builds for device <:harold:498881491368017930>")
 
     async def getlos(self, ctx, device):
         async with aiohttp.ClientSession() as session:
@@ -113,7 +113,7 @@ class ROMResolver(commands.Cog):
                         embed.set_footer(text=embedfooter)
                         await ctx.send(embed=embed)
                     elif str(usr['response']) == '[]':
-                        await ctx.send('No builds for device :(')
+                        await ctx.send('No builds for device <:harold:498881491368017930>')
 
     async def gethavoc(self, ctx, device):
         async with aiohttp.ClientSession() as session:
@@ -132,7 +132,7 @@ class ROMResolver(commands.Cog):
                     embed.set_footer(text=embedfooter)
                     await ctx.send(embed=embed)
                 elif fetch.status == 404:
-                    await ctx.send("No builds for device :(")
+                    await ctx.send("No builds for device <:harold:498881491368017930>")
 
     async def getpixys(self, ctx, device: str):
         async with aiohttp.ClientSession() as session:
@@ -151,7 +151,7 @@ class ROMResolver(commands.Cog):
                     embed.set_footer(text=embedfooter)
                     await ctx.send(embed=embed)
                 elif fetch.status == 404:
-                    await ctx.send("No builds for device :(")
+                    await ctx.send("No builds for device <:harold:498881491368017930>")
 
     async def getpearl(self, ctx, device):
         async with aiohttp.ClientSession() as session:
@@ -170,7 +170,7 @@ class ROMResolver(commands.Cog):
                     embed.set_footer(text=embedfooter)
                     await ctx.send(embed=embed)
                 elif fetch.status == 404:
-                    return await ctx.send("No builds for device :(")
+                    return await ctx.send("No builds for device <:harold:498881491368017930>")
 
     async def getdotos(self, ctx, device):
         async with aiohttp.ClientSession() as session:
@@ -208,7 +208,7 @@ class ROMResolver(commands.Cog):
                     embed.set_footer(text=embedfooter)
                     await ctx.send(embed=embed)
                 elif fetch.status == 404:
-                    await ctx.send("No builds for device :(")
+                    await ctx.send("No builds for device <:harold:498881491368017930>")
 
     async def getevo(self, ctx, device):
         async with aiohttp.ClientSession() as session:
@@ -227,7 +227,7 @@ class ROMResolver(commands.Cog):
                     embed.set_footer(text=embedfooter)
                     await ctx.send(embed=embed)
                 elif fetch.status == 404:
-                    await ctx.send("Device not found!")
+                    await ctx.send("Device not found! <:harold:498881491368017930>")
 
     async def getposp(self, ctx, device):
         async with aiohttp.ClientSession() as session:
@@ -247,9 +247,9 @@ class ROMResolver(commands.Cog):
                         embed.set_footer(text=embedfooter)
                         await ctx.send(embed=embed)
                     else:
-                        await ctx.send('No builds for device :(')
+                        await ctx.send('No builds for device <:harold:498881491368017930>')
                 else:
-                    await ctx.send('No builds for device :(')
+                    await ctx.send('No builds for device <:harold:498881491368017930>')
 
     @commands.command(aliases=['potato'])
     async def posp(self, ctx, phone: str):
@@ -264,7 +264,7 @@ class ROMResolver(commands.Cog):
                         device = phone.upper()
                         await self.getposp(ctx, device)
                 else:
-                    await ctx.send('No builds for device :(')
+                    await ctx.send('No builds for device <:harold:498881491368017930>')
 
     @commands.command(aliases=['evox'])
     async def evo(self, ctx, phone: str):
@@ -288,7 +288,7 @@ class ROMResolver(commands.Cog):
                     device = phone.upper()
                     await self.getviper(ctx, device)
                 else:
-                    await ctx.send('Could not reach ViperOS servers.')
+                    await ctx.send('Could not reach ViperOS servers. <:harold:498881491368017930>')
 
     @commands.command()
     async def dotos(self, ctx, phone: str):
@@ -312,7 +312,7 @@ class ROMResolver(commands.Cog):
                     device = phone.upper()
                     await self.getpearl(ctx, device)
                 else:
-                    await ctx.send('Could not reach PearlOS servers.')
+                    await ctx.send('Could not reach PearlOS servers. <:harold:498881491368017930>')
 
     @commands.command(aliases=['pixys'])
     async def pixy(self, ctx, phone):
@@ -325,7 +325,7 @@ class ROMResolver(commands.Cog):
                 elif fetch.status == 200:
                     await self.getpixys(ctx, device)
                 else:
-                    await ctx.send('Could not reach PixysOS servers.')
+                    await ctx.send('Could not reach PixysOS servers. <:harold:498881491368017930>')
 
     @commands.command()
     async def havoc(self, ctx, phone):
@@ -351,7 +351,7 @@ class ROMResolver(commands.Cog):
                     elif str(usr['response']) != '[]':
                         await self.getlos(ctx, device)
                 else:
-                    await ctx.send('Cannot connect to LineageOS servers.')
+                    await ctx.send('Cannot connect to LineageOS servers. <:harold:498881491368017930>')
 
     @commands.command()
     async def pe(self, ctx, phone, peversion=None):
@@ -377,7 +377,7 @@ class ROMResolver(commands.Cog):
                     versionpe = 'pie'
                     usr = await fetch.json()
         else:
-            return await ctx.send('Device/Version not found!')
+            return await ctx.send('Device/Version not found! <:harold:498881491368017930>')
         if fetch.status == 200:
             if usr['error']:
                 device = phone.upper()
@@ -400,7 +400,7 @@ class ROMResolver(commands.Cog):
                     elif device in usr:
                         await self.getbtlg(ctx, device)
                 elif devices.status != 404:
-                    await ctx.send("Couldn't reach Bootleggers API!")
+                    await ctx.send("Couldn't reach Bootleggers API! <:harold:498881491368017930>")
 
     @commands.command()
     async def aex(self, ctx, phone: str, version='pie'):
@@ -415,7 +415,7 @@ class ROMResolver(commands.Cog):
                     elif not usr['error']:
                         await self.getaex(ctx, device, version)
                 elif fetch.status == 404:
-                    await ctx.send('Cannot connect to AEX servers.')
+                    await ctx.send('Cannot connect to AEX servers. <:harold:498881491368017930>')
                 elif fetch.status == 403:
                     device = phone.upper()
                     await self.getaex(ctx, device, version)
@@ -435,7 +435,7 @@ class ROMResolver(commands.Cog):
                         device = phone.upper()
                         await self.getcrdroid(ctx, device)
                 else:
-                    ctx.send('Cannot connect to crDroid servers.')
+                    ctx.send('Cannot connect to crDroid servers. <:harold:498881491368017930>')
 
     @commands.command(name="roms")
     async def devicechecker(self, ctx, device=None):
@@ -554,7 +554,7 @@ class ROMResolver(commands.Cog):
                 embed.set_footer(text=embedfooter)
                 await ctx.send(embed=embed)
             elif reply_text == '':
-                await ctx.send('No available supported ROMs for device :(')
+                await ctx.send('No available supported ROMs for device. <:harold:498881491368017930>')
 
 
 def setup(bot):
