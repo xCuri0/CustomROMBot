@@ -26,7 +26,8 @@ roms = 'DotOS (dotos)\n' \
        'Pixel Experience (pe) \n' \
        'BootleggersROM (btlg/bootleggers) \n' \
        'AOSP Extended (aex) \n' \
-       'crDroid (crdroid)\n'
+       'crDroid (crdroid)\n' \
+       'Syberia (syberia)\n'
 
 
 @bot.event
