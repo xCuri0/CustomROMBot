@@ -28,7 +28,7 @@ roms = 'DotOS (dotos)\n' \
        'AOSP Extended (aex) \n' \
        'crDroid (crdroid)\n' \
        'Syberia (syberia)\n' \
-       'Resurrection Remix \n'
+       'Resurrection Remix (rr)\n'
 
 
 @bot.event
@@ -63,6 +63,8 @@ async def help(ctx):
                                                                "Versions: Oreo (oreo), Pie (pie), "
                                                                "Pie-CAF (caf) (exclusive to PE)\n"
                                                                "Example: `!pe tissot oreo`", inline=False)
+    embed.add_field(name='Magisk', value='gets latest Magisk version (stable/canary/beta)\n'
+                                         'Usage: `!magisk (beta/canary/stable)`')
     embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
     try:
         await ctx.author.send(embed=embed)
