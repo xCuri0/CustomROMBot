@@ -17,7 +17,8 @@ roms = 'DotOS (dotos)\n' \
        'BootleggersROM (btlg/bootleggers) \n' \
        'AOSP Extended (aex) \n' \
        'crDroid (crdroid)\n' \
-       'Syberia (syberia)\n'
+       'Syberia (syberia)\n' \
+       'Resurrection Remix (rr)\n'
 
 
 class DeviceChecker(commands.Cog):
@@ -143,6 +144,12 @@ class DeviceChecker(commands.Cog):
                     f'https://raw.githubusercontent.com/syberia-project/official_devices/master/ab/{device}.json') as fetch:
                     if fetch.status == 200:
                         reply_text += 'Syberia\n'
+                    else:
+                        pass
+                async with session.get(
+                        f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json') as fetch:
+                    if fetch.status == 200:
+                        reply_text += 'Resurrection Remix \n'
                     else:
                         pass
             if reply_text != '':

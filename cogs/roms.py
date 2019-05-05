@@ -14,6 +14,25 @@ class ROMResolver(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    async def getrr(self, ctx, device):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json') as fetch:
+                if fetch.status == 200:
+                    usr = await fetch.json(content_type=None)
+                    filesize = size(int(usr['response'][0]['size']))
+                    builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
+                    valued = f"**Build date**: `{builddate}`\n" \
+                             f"**Size**: `{filesize}`\n" \
+                             f"**Version**: `{usr['response'][0]['version']}`\n" \
+                             f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
+                    embed = discord.Embed(title=f"Resurrection Remix | {device}",
+                                          description=valued,
+                                          color=embedcolor)
+                    embed.set_footer(text=embedfooter)
+                    await ctx.send(embed=embed)
+                elif fetch.status == 404:
+                    await ctx.send("No builds for device <:harold:498881491368017930>")
+
     async def getsyberia(self, ctx, device, usr, partition):
         if partition == 'a-only':
             valued = f"**Build date**: `{usr['build_date']}`\n" \
@@ -38,7 +57,8 @@ class ROMResolver(commands.Cog):
 
     async def getcrdroid(self, ctx, device):
         async with aiohttp.ClientSession() as session:
-            async with session.get('https://raw.githubusercontent.com/crdroidandroid/android_vendor_crDroidOTA/9.0/update.xml') as fetch:
+            async with session.get(
+                    'https://raw.githubusercontent.com/crdroidandroid/android_vendor_crDroidOTA/9.0/update.xml') as fetch:
                 if fetch.status == 200:
                     fetchawait = await fetch.read()
                     soup = BeautifulSoup(fetchawait.decode('utf-8'), features="lxml")
@@ -146,7 +166,8 @@ class ROMResolver(commands.Cog):
 
     async def getpixys(self, ctx, device: str):
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://raw.githubusercontent.com/PixysOS-Devices/official_devices/master/{device}/build.json') as fetch:
+            async with session.get(
+                    f'https://raw.githubusercontent.com/PixysOS-Devices/official_devices/master/{device}/build.json') as fetch:
                 if fetch.status == 200:
                     usr = await fetch.json(content_type=None)
                     filesize = size(int(usr['response'][0]['size']))
@@ -462,6 +483,17 @@ class ROMResolver(commands.Cog):
                 elif fetch.status == 200:
                     usr = await fetch.json(content_type=None)
                     await self.getsyberia(ctx, device, usr, partition)
+
+    @commands.command()
+    async def rr(self, ctx, phone):
+        device = phone.lower()
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://raw.githubusercontent.com/ResurrectionRemix-Devices/api/master/{device}.json') as fetch:
+                if fetch.status == 404:
+                    device = phone.upper()
+                    await self.getrr(ctx, device)
+                elif fetch.status == 200:
+                    await self.getrr(ctx, device)
 
 
 def setup(bot):
