@@ -16,7 +16,8 @@ class ROMResolver(commands.Cog):
 
     async def getrr(self, ctx, device):
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json') as fetch:
+            async with session.get(
+                    f'https://raw.githubusercontent.com/ResurrectionRemix-Devices/api/master/{device}.json') as fetch:
                 if fetch.status == 200:
                     usr = await fetch.json(content_type=None)
                     filesize = size(int(usr['response'][0]['size']))
@@ -243,7 +244,7 @@ class ROMResolver(commands.Cog):
 
     async def getevo(self, ctx, device):
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://raw.githubusercontent.com/evolution-x/official_devices/master/builds/{device}.json') as fetch:
+            async with session.get(f'https://raw.githubusercontent.com/evolution-x-devices/official_devices/master/builds/{device}.json') as fetch:
                 if fetch.status == 200:
                     usr = await fetch.json(content_type=None)
                     filesize = size(int(usr['size']))
@@ -301,7 +302,7 @@ class ROMResolver(commands.Cog):
     async def evo(self, ctx, phone: str):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://raw.githubusercontent.com/evolution-x/official_devices/master/builds/{device}.json') as fetch:
+            async with session.get(f'https://raw.githubusercontent.com/evolution-x-devices/official_devices/master/builds/{device}.json') as fetch:
                 if fetch.status == 200:
                     await self.getevo(ctx, device)
                 elif fetch.status == 404:
