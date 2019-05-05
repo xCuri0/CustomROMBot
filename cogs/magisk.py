@@ -29,10 +29,10 @@ class MagiskResolver(commands.Cog):
                 elif version == 'canary':
                     embed = discord.Embed(title='Magisk Canary', color=embedcolor)
                 embed.add_field(name=f"Magisk", value=f"Version: Magisk v{usr['magisk']['version']} `{usr['magisk']['versionCode']}` \n"
-                                                      f"Link: [Download Here!]({usr['magisk']['link']})\n", inline=False)
+                                                      f"[Download Here!]({usr['magisk']['link']})\n", inline=False)
                 embed.add_field(name=f"Magisk Manager", value=f"Version: {usr['app']['version']} `{usr['app']['versionCode']}` \n"
-                                                              f"Download: [Download Here!]({usr['app']['link']})\n", inline=False)
-                embed.add_field(name=f"Magisk Uninstaller", value=f"Download: [Download Here!]({usr['uninstaller']['link']})\n", inline=False)
+                                                              f"[Download Here!]({usr['app']['link']})\n", inline=False)
+                embed.add_field(name=f"Magisk Uninstaller", value=f"[Download Here!]({usr['uninstaller']['link']})\n", inline=False)
                 embed.set_footer(text=embedfooter)
                 await ctx.send(embed=embed)
             else:
