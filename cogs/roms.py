@@ -470,20 +470,35 @@ class ROMResolver(commands.Cog):
                     ctx.send('Cannot connect to crDroid servers. <:harold:498881491368017930>')
 
     @commands.command()
-    async def syberia(self, ctx, device, partition="a-only"):
+    async def syberia(self, ctx, phone, partition="a-only"):
+        device = phone.lower()
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/{partition}/{device}.json') as fetch:
-                if fetch.status == 404:
-                    partition = 'ab'
-                    async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/{partition}/{device}.json') as fetch:
-                        if fetch.status == 404:
-                            await ctx.send('Cannot find device <:harold:498881491368017930>')
-                        elif fetch.status == 200:
-                            usr = await fetch.json(content_type=None)
-                            await  self.getsyberia(ctx, device, usr, partition)
-                elif fetch.status == 200:
-                    usr = await fetch.json(content_type=None)
+            if device == 'enchilada':
+                partition = 'ab'
+                device = 'OnePlus6'
+                async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/{partition}/{device}.json') as fetch:
+                    usr = fetch.json(content_type=None)
                     await self.getsyberia(ctx, device, usr, partition)
+            elif device == 'fajita':
+                partition = 'ab'
+                device = 'OnePlus6T'
+                async with session.get(
+                        f'https://raw.githubusercontent.com/syberia-project/official_devices/master/{partition}/{device}.json') as fetch:
+                    usr = fetch.json(content_type=None)
+                    await self.getsyberia(ctx, device, usr, partition)
+            else:
+                async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/{partition}/{device}.json') as fetch:
+                    if fetch.status == 404:
+                        partition = 'ab'
+                        async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/{partition}/{device}.json') as fetch:
+                            if fetch.status == 404:
+                                await ctx.send('Cannot find device <:harold:498881491368017930>')
+                            elif fetch.status == 200:
+                                usr = await fetch.json(content_type=None)
+                                await  self.getsyberia(ctx, device, usr, partition)
+                    elif fetch.status == 200:
+                        usr = await fetch.json(content_type=None)
+                        await self.getsyberia(ctx, device, usr, partition)
 
     @commands.command()
     async def rr(self, ctx, phone):
