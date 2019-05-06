@@ -477,14 +477,14 @@ class ROMResolver(commands.Cog):
                 partition = 'ab'
                 device = 'OnePlus6'
                 async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/{partition}/{device}.json') as fetch:
-                    usr = fetch.json(content_type=None)
+                    usr = await fetch.json(content_type=None)
                     await self.getsyberia(ctx, device, usr, partition)
             elif device == 'fajita':
                 partition = 'ab'
                 device = 'OnePlus6T'
                 async with session.get(
                         f'https://raw.githubusercontent.com/syberia-project/official_devices/master/{partition}/{device}.json') as fetch:
-                    usr = fetch.json(content_type=None)
+                    usr = await fetch.json(content_type=None)
                     await self.getsyberia(ctx, device, usr, partition)
             else:
                 async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/{partition}/{device}.json') as fetch:
