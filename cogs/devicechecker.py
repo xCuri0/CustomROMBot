@@ -34,18 +34,24 @@ class DeviceChecker(commands.Cog):
             await ctx.send(embed=embed)
         elif device is not None:
             async with aiohttp.ClientSession() as session:
-                async with session.get(f'https://api.aospextended.com/ota/{device}/pie') as fetch:
-                    usr = await fetch.json(content_type=None)
-                    if not usr['error']:
-                        reply_text += 'AEX (Pie)\n'
-                    else:
-                        pass
-                async with session.get(f'https://api.aospextended.com/ota/{device}/oreo') as fetch:
-                    usr = await fetch.json(content_type=None)
-                    if not usr['error']:
-                        reply_text += 'AEX (Oreo)\n'
-                    else:
-                        pass
+                try:
+                    async with session.get(f'https://api.aospextended.com/ota/{device}/pie') as fetch:
+                        usr = await fetch.json(content_type=None)
+                        if not usr['error']:
+                            reply_text += 'AEX (Pie)\n'
+                        else:
+                            pass
+                except:
+                    pass
+                try:
+                    async with session.get(f'https://api.aospextended.com/ota/{device}/oreo') as fetch:
+                        usr = await fetch.json(content_type=None)
+                        if not usr['error']:
+                            reply_text += 'AEX (Oreo)\n'
+                        else:
+                            pass
+                except:
+                    pass
                 async with session.get('https://bootleggersrom-devices.github.io/api/devices.json') as devices:
                     if devices.status == 200:
                         usr = await devices.json()
@@ -147,7 +153,7 @@ class DeviceChecker(commands.Cog):
                     else:
                         pass
                 async with session.get(
-                        f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json') as fetch:
+                        f'https://raw.githubusercontent.com/ResurrectionRemix-Devices/api/master/{device}.json') as fetch:
                     if fetch.status == 200:
                         reply_text += 'Resurrection Remix \n'
                     else:
