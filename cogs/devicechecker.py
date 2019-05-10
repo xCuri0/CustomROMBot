@@ -35,12 +35,12 @@ class DeviceChecker(commands.Cog):
                     if not usr['error']:
                         self.reply_text += 'AEX (Pie)\n'
                     else:
-                        pass
+                        return
                 await session.close()
             except Exception as e:
                 print('From getaaexoreo: ')
                 print(e)
-                pass
+                return 
 
     async def getaexpie(self, device):
         async with aiohttp.ClientSession() as session:
@@ -50,12 +50,12 @@ class DeviceChecker(commands.Cog):
                     if not usr['error']:
                         self.reply_text += 'AEX (Oreo)\n'
                     else:
-                        pass
+                        return
                     await session.close()
             except Exception as e:
                 print('From getaaexpie: ')
                 print(e)
-                pass
+                return 
 
     async def getbtlg(self, device):
         async with aiohttp.ClientSession() as session:
@@ -66,14 +66,14 @@ class DeviceChecker(commands.Cog):
                         if device in usr:
                             self.reply_text += 'BootleggersROM\n'
                         else:
-                            pass
+                            return 
                     else:
-                        pass
+                        return 
                     await session.close()
             except Exception as e:
                 print('From btlg: ')
                 print(e)
-                pass
+                return
 
     async def getpe(self, device):
             try:
@@ -83,10 +83,10 @@ class DeviceChecker(commands.Cog):
                         if not usr['error']:
                             self.reply_text += 'Pixel Experience (Pie)\n'
                         else:
-                            pass
+                            return 
                         await session.close()
             except:
-                pass
+                return
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie_caf') as fetch:
@@ -95,7 +95,7 @@ class DeviceChecker(commands.Cog):
                             self.reply_text += 'Pixel Experience (Pie-CAF)\n'
                         await session.close()
             except:
-                pass
+                return
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/oreo') as fetch:
@@ -106,7 +106,7 @@ class DeviceChecker(commands.Cog):
             except Exception as e:
                 print('From pe: ')
                 print(e)
-                pass
+                return
 
     async def getlineage(self, device):
         async with aiohttp.ClientSession() as session:
@@ -116,12 +116,12 @@ class DeviceChecker(commands.Cog):
                     if fetch.status == 200 and str(usr['response']) != '[]':
                         self.reply_text += 'LineageOS\n'
                     else:
-                        pass
+                        return 
                 await session.close()
             except Exception as e:
                 print('From lineage: ')
                 print(e)
-                pass
+                return
 
     async def gethavoc(self, device):
         async with aiohttp.ClientSession() as session:
@@ -133,14 +133,14 @@ class DeviceChecker(commands.Cog):
                         if str(usr['response']) != '[]':
                             self.reply_text += 'HavocOS\n'
                         else:
-                            pass
+                            return
                     else:
-                        pass
+                        return
                 await session.close()
             except Exception as e:
                 print('From havoc: ')
                 print(e)
-                pass
+                return
 
     async def getpixys(self, device):
         async with aiohttp.ClientSession() as session:
@@ -150,12 +150,12 @@ class DeviceChecker(commands.Cog):
                     if fetch.status == 200:
                         self.reply_text += 'PixysOS\n'
                     else:
-                        pass
+                        return 
                 await session.close()
             except Exception as e:
                 print('From pixys: ')
                 print(e)
-                pass
+                return
 
     async def getpearl(self, device):
         async with aiohttp.ClientSession() as session:
@@ -164,12 +164,12 @@ class DeviceChecker(commands.Cog):
                     if fetch.status == 200:
                         self.reply_text += 'PearlOS\n'
                     else:
-                        pass
+                        return
                 await session.close()
             except Exception as e:
                 print('From pearl: ')
                 print(e)
-                pass
+                return
 
     async def getdot(self, device):
         async with aiohttp.ClientSession() as session:
@@ -179,12 +179,12 @@ class DeviceChecker(commands.Cog):
                     if fetch.status == 200:
                         self.reply_text += 'DotOS\n'
                     else:
-                        pass
+                        return
                 await session.close()
             except Exception as e:
                 print('From dot: ')
                 print(e)
-                pass
+                return
 
     async def getviper(self, device):
         async with aiohttp.ClientSession() as session:
@@ -194,12 +194,12 @@ class DeviceChecker(commands.Cog):
                     if fetch.status == 200:
                         self.reply_text += 'ViperOS\n'
                     else:
-                        pass
+                        return
                 await session.close()
             except Exception as e:
                 print('From viper: ')
                 print(e)
-                pass
+                return
 
     async def getevo(self, ctx, device):
         if device == 'enchilada':
@@ -212,12 +212,12 @@ class DeviceChecker(commands.Cog):
                         if fetch.status == 200:
                             self.reply_text += 'Evolution-X\n'
                         else:
-                            pass
+                            return
                     await session.close()
             except Exception as e:
                 print('From evo: ')
                 print(e)
-                pass
+                return
 
     async def getpotato(self, device):
         async with aiohttp.ClientSession() as session:
@@ -228,12 +228,12 @@ class DeviceChecker(commands.Cog):
                     if fetch.status == 200 and str(usr['response']) != '[]':
                         self.reply_text += "Potato Open Sauce Project \n"
                     else:
-                        pass
+                        return
                 await session.close()
             except Exception as e:
                 print('From potat: ')
                 print(e)
-                pass
+                return
 
     async def getcrdroid(self, device):
         async with aiohttp.ClientSession() as session:
@@ -246,12 +246,12 @@ class DeviceChecker(commands.Cog):
                     if finddevice is not None:
                         self.reply_text += 'crDroid\n'
                     else:
-                        pass
+                        return
                 await session.close()
             except Exception as e:
                 print('From crd: ')
                 print(e)
-                pass
+                return
 
     async def getsyberia(self, device):
         if device == 'fajita':
@@ -261,12 +261,12 @@ class DeviceChecker(commands.Cog):
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
                         else:
-                            pass
+                            return
                 await session.close()
             except Exception as e:
                 print('From syb: ')
                 print(e)
-                pass
+                return
         elif device == 'enchilada':
             try:
                 async with aiohttp.ClientSession() as session:
@@ -274,12 +274,12 @@ class DeviceChecker(commands.Cog):
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
                         else:
-                            pass
+                            return
                 await session.close()
             except Exception as e:
                 print('From syb: ')
                 print(e)
-                pass
+                return
         elif device != 'fajita' or device != 'enchilada':
             try:
                 async with aiohttp.ClientSession() as session:
@@ -287,26 +287,26 @@ class DeviceChecker(commands.Cog):
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
                         else:
-                            pass
+                            return
                 await session.close()
             except Exception as e:
                 print('From syb: ')
                 print(e)
-                pass
+                return
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/ab/{device}.json') as fetch:
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
                         else:
-                            pass
+                            return
                 await session.close()
             except Exception as e:
                 print('From syb: ')
                 print(e)
-                pass
+                return
         else:
-            pass
+            return
 
     async def getrr(self, device):
         try:
@@ -315,12 +315,12 @@ class DeviceChecker(commands.Cog):
                     if fetch.status == 200:
                         self.reply_text += 'Resurrection Remix \n'
                     else:
-                        pass
+                        return
             await session.close()
         except Exception as e:
             print('From rr: ')
             print(e)
-            pass
+            return
 
     @commands.command(name="roms")
     async def devicechecker(self, ctx, device=None):
@@ -352,6 +352,7 @@ class DeviceChecker(commands.Cog):
                                       color=embedcolor)
                 embed.set_footer(text=embedfooter)
                 await ctx.send(embed=embed)
+                self.reply_text = ''
             elif self.reply_text == '':
                 await ctx.send('No available supported ROMs for device. <:harold:498881491368017930>')
 
