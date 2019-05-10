@@ -14,6 +14,42 @@ class ROMResolver(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    async def getsuperior(self, ctx, device):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://raw.githubusercontent.com/SuperiorOS/official_devices/pie/{device}.json') as fetch:
+                if fetch.status == 200:
+                    usr = await fetch.json(content_type=None)
+                    filesize = size(int(usr['response'][0]['size']))
+                    builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
+                    valued = f"**Build date**: `{builddate}`\n" \
+                        f"**Size**: `{filesize}`\n" \
+                        f"**Version**: `{usr['response'][0]['version']}`\n" \
+                        f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
+                    embed = discord.Embed(title=f"SuperiorOS | {device}",
+                                          description=valued,
+                                          color=embedcolor)
+                    embed.set_footer(text=embedfooter)
+                    await ctx.send(embed=embed)
+                elif fetch.status == 404:
+                    await ctx.send("No builds for device <:harold:498881491368017930>")
+
+    async def getrevenge(self, ctx, device):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://raw.githubusercontent.com/RevengeOS/releases/master/{device}.json') as fetch:
+                if fetch.status == 200:
+                    usr = await fetch.json(content_type=None)
+                    valued = f"**Build date**: `{usr[-1]['date']}`\n" \
+                             f"**Size**: `{usr[-1]['size']}`\n" \
+                             f"**Version**: `{usr[-1]['version']}`\n" \
+                             f"**Download**: [{usr[-1]['file_name']}](https://acc.dl.osdn.jp/storage/g/r/re/revengeos/{device}/{usr[-1]['file_name']})"
+                    embed = discord.Embed(title=f"RevengeOS | {device}",
+                                          description=valued,
+                                          color=embedcolor)
+                    embed.set_footer(text=embedfooter)
+                    await ctx.send(embed=embed)
+                elif fetch.status == 404:
+                    await ctx.send("No builds for device <:harold:498881491368017930>")
+
     async def getrr(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(
@@ -510,6 +546,40 @@ class ROMResolver(commands.Cog):
                     await self.getrr(ctx, device)
                 elif fetch.status == 200:
                     await self.getrr(ctx, device)
+
+    @commands.command()
+    async def revenge(self, ctx, phone):
+        device = phone.lower()
+        async with aiohttp.ClientSession() as session:
+            try:
+                async with session.get(f'https://raw.githubusercontent.com/RevengeOS/releases/master/{device}.json') as fetch:
+                    if fetch.status == 200:
+                        await self.getrevenge(ctx, device)
+                    elif fetch.status == 404:
+                        device = phone.upper()
+                        await self.getrevenge(ctx, device)
+                    else:
+                        await ctx.send('Cannot reach RevengeOS servers.')
+            except Exception as e:
+                print('From revenge:')
+                print(e)
+                return
+
+    @commands.command()
+    async def superior(self, ctx, phone):
+        device = phone.lower()
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f'https://raw.githubusercontent.com/SuperiorOS/official_devices/pie/{device}.json') as fetch:
+                    if fetch.status == 404:
+                        device = phone.upper()
+                        await self.getsuperior(ctx, device)
+                    elif fetch.status == 200:
+                        await self.getsuperior(ctx, device)
+        except Exception as e:
+            print('From Superior:')
+            print(e)
+            return
 
 
 def setup(bot):

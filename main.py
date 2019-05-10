@@ -15,20 +15,22 @@ loaded_extensions = []
 
 bot.remove_command("help")
 
-roms = 'DotOS (dotos)\n' \
+roms = 'AOSP Extended (aex) \n' \
+       'BootleggersROM (btlg/bootleggers) \n' \
+       'crDroid (crdroid)\n' \
+       'DotOS (dotos)\n' \
        'Evolution-X (evo)\n' \
        'HavocOS (havoc)\n' \
+       'LineageOS (los/lineage)\n' \
        'PearlOS (pearl)\n' \
+       'Pixel Experience (pe) \n' \
        'PixysOS (pixy)\n' \
        'Potato Open Sauce Project (posp)\n' \
-       'ViperOS (viper)\n' \
-       'LineageOS (los/lineage)\n' \
-       'Pixel Experience (pe) \n' \
-       'BootleggersROM (btlg/bootleggers) \n' \
-       'AOSP Extended (aex) \n' \
-       'crDroid (crdroid)\n' \
+       'Resurrection Remix (rr)\n' \
+       'RevengeOS(revenge)\n' \
+       'SuperiorOS(superior)\n' \
        'Syberia (syberia)\n' \
-       'Resurrection Remix (rr)\n'
+       'ViperOS (viper)\n'
 
 
 @bot.event

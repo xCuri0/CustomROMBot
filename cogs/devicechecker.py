@@ -5,20 +5,22 @@ from bs4 import BeautifulSoup
 
 embedcolor = 0x5eff72
 embedfooter = "Bot by Keikei14 | Keikei14#7950"
-roms = 'DotOS (dotos)\n' \
+roms = 'AOSP Extended (aex) \n' \
+       'BootleggersROM (btlg/bootleggers) \n' \
+       'crDroid (crdroid)\n' \
+       'DotOS (dotos)\n' \
        'Evolution-X (evo)\n' \
        'HavocOS (havoc)\n' \
+       'LineageOS (los/lineage)\n' \
        'PearlOS (pearl)\n' \
+       'Pixel Experience (pe) \n' \
        'PixysOS (pixy)\n' \
        'Potato Open Sauce Project (posp)\n' \
-       'ViperOS (viper)\n' \
-       'LineageOS (los/lineage)\n' \
-       'Pixel Experience (pe) \n' \
-       'BootleggersROM (btlg/bootleggers) \n' \
-       'AOSP Extended (aex) \n' \
-       'crDroid (crdroid)\n' \
+       'Resurrection Remix (rr)\n' \
+       'RevengeOS(revenge)\n' \
+       'SuperiorOS(superior)\n' \
        'Syberia (syberia)\n' \
-       'Resurrection Remix (rr)\n'
+       'ViperOS (viper)\n'
 
 
 class DeviceChecker(commands.Cog):
@@ -201,9 +203,9 @@ class DeviceChecker(commands.Cog):
                 print(e)
                 return
 
-    async def getevo(self, ctx, device):
+    async def getevo(self, device):
         if device == 'enchilada':
-            ctx.send('No available supported ROMs for device. <:harold:498881491368017930>')
+            return
         elif device != 'enchilada':
             try:
                 async with aiohttp.ClientSession() as session:
@@ -322,6 +324,34 @@ class DeviceChecker(commands.Cog):
             print(e)
             return
 
+    async def getrevenge(self, device):
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f'https://raw.githubusercontent.com/RevengeOS/releases/master/{device}.json') as fetch:
+                    if fetch.status == 200:
+                        self.reply_text += 'RevengeOS\n'
+                    else:
+                        return
+            await session.close()
+        except Exception as e:
+            print('From getrevenge:')
+            print(e)
+            return
+
+    async def getsuperior(self, device):
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f'https://raw.githubusercontent.com/SuperiorOS/official_devices/pie/{device}.json') as fetch:
+                    if fetch.status == 200:
+                        self.reply_text += 'SuperiorOS\n'
+                    else:
+                        return
+            await session.close()
+        except Exception as e:
+            print('From getsuperior')
+            print(e)
+            return
+
     @commands.command(name="roms")
     async def devicechecker(self, ctx, device=None):
         if "@everyone" in ctx.message.content or "@here" in ctx.message.content or ctx.message.mention_everyone:
@@ -331,21 +361,23 @@ class DeviceChecker(commands.Cog):
             embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
             await ctx.send(embed=embed)
         elif device is not None:
-            await self.getrr(device)
             await self.getaexoreo(device)
             await self.getaexpie(device)
             await self.getbtlg(device)
-            await self.getpe(device)
-            await self.getlineage(device)
+            await self.getcrdroid(device)
+            await self.getdot(device)
+            await self.getevo(device)
             await self.gethavoc(device)
+            await self.getlineage(device)
+            await self.getpe(device)
             await self.getpearl(device)
             await self.getpixys(device)
-            await self.getdot(device)
-            await self.getviper(device)
-            await self.getevo(ctx, device)
             await self.getpotato(device)
-            await self.getcrdroid(device)
+            await self.getrevenge(device)
+            await self.getrr(device)
+            await self.getsuperior(device)
             await self.getsyberia(device)
+            await self.getviper(device)
             if self.reply_text != '':
                 embed = discord.Embed(title=f"Available ROMs for {device}",
                                       description=self.reply_text,
