@@ -385,8 +385,11 @@ class DeviceChecker(commands.Cog):
                 embed.set_footer(text=embedfooter)
                 await ctx.send(embed=embed)
                 self.reply_text = ''
+                return
             elif self.reply_text == '':
                 await ctx.send('No available supported ROMs for device. <:harold:498881491368017930>')
+                self.reply_text = ''
+                return
 
 
 def setup(bot):
