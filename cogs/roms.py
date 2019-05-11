@@ -297,9 +297,9 @@ class ROMResolver(commands.Cog):
                 elif fetch.status == 404:
                     await ctx.send("Device not found! <:harold:498881491368017930>")
 
-    async def getposp(self, ctx, device):
+    async def getposp(self, ctx, device, channel='weekly'):
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
+            async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type={channel}') as fetch:
                 if fetch.status == 200:
                     usr = await fetch.json()
                     if str(usr['response']) != "[]":
