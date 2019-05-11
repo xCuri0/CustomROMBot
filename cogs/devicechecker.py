@@ -36,13 +36,9 @@ class DeviceChecker(commands.Cog):
                     usr = await fetch.json(content_type=None)
                     if not usr['error']:
                         self.reply_text += 'AEX (Pie)\n'
-                    else:
-                        return
-                await session.close()
             except Exception as e:
                 print('From getaaexoreo: ')
                 print(e)
-                return 
 
     async def getaexpie(self, device):
         async with aiohttp.ClientSession() as session:
@@ -51,13 +47,9 @@ class DeviceChecker(commands.Cog):
                     usr = await fetch.json(content_type=None)
                     if not usr['error']:
                         self.reply_text += 'AEX (Oreo)\n'
-                    else:
-                        return
-                    await session.close()
             except Exception as e:
                 print('From getaaexpie: ')
                 print(e)
-                return 
 
     async def getbtlg(self, device):
         async with aiohttp.ClientSession() as session:
@@ -65,17 +57,11 @@ class DeviceChecker(commands.Cog):
                 async with session.get('https://bootleggersrom-devices.github.io/api/devices.json') as devices:
                     if devices.status == 200:
                         usr = await devices.json()
-                        if device in usr:
+                        if usr.get(device) is not None:
                             self.reply_text += 'BootleggersROM\n'
-                        else:
-                            return 
-                    else:
-                        return 
-                    await session.close()
             except Exception as e:
                 print('From btlg: ')
                 print(e)
-                return
 
     async def getpe(self, device):
             try:
@@ -84,9 +70,6 @@ class DeviceChecker(commands.Cog):
                         usr = await fetch.json()
                         if not usr['error']:
                             self.reply_text += 'Pixel Experience (Pie)\n'
-                        else:
-                            return 
-                        await session.close()
             except:
                 return
             try:
@@ -95,7 +78,6 @@ class DeviceChecker(commands.Cog):
                         usr = await fetch.json()
                         if not usr['error']:
                             self.reply_text += 'Pixel Experience (Pie-CAF)\n'
-                        await session.close()
             except:
                 return
             try:
@@ -104,11 +86,9 @@ class DeviceChecker(commands.Cog):
                         usr = await fetch.json()
                         if not usr['error']:
                             self.reply_text += 'Pixel Experience (Oreo)\n'
-                        await session.close()
             except Exception as e:
                 print('From pe: ')
                 print(e)
-                return
 
     async def getlineage(self, device):
         async with aiohttp.ClientSession() as session:
@@ -117,13 +97,9 @@ class DeviceChecker(commands.Cog):
                     usr = await fetch.json()
                     if fetch.status == 200 and str(usr['response']) != '[]':
                         self.reply_text += 'LineageOS\n'
-                    else:
-                        return 
-                await session.close()
             except Exception as e:
                 print('From lineage: ')
                 print(e)
-                return
 
     async def gethavoc(self, device):
         async with aiohttp.ClientSession() as session:
@@ -134,15 +110,9 @@ class DeviceChecker(commands.Cog):
                         usr = await fetch.json(content_type=None)
                         if str(usr['response']) != '[]':
                             self.reply_text += 'HavocOS\n'
-                        else:
-                            return
-                    else:
-                        return
-                await session.close()
             except Exception as e:
                 print('From havoc: ')
                 print(e)
-                return
 
     async def getpixys(self, device):
         async with aiohttp.ClientSession() as session:
@@ -151,13 +121,9 @@ class DeviceChecker(commands.Cog):
                         f'https://raw.githubusercontent.com/PixysOS-Devices/official_devices/master/{device}/build.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'PixysOS\n'
-                    else:
-                        return 
-                await session.close()
             except Exception as e:
                 print('From pixys: ')
                 print(e)
-                return
 
     async def getpearl(self, device):
         async with aiohttp.ClientSession() as session:
@@ -165,13 +131,9 @@ class DeviceChecker(commands.Cog):
                 async with session.get(f'https://raw.githubusercontent.com/PearlOS/OTA/master/{device}.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'PearlOS\n'
-                    else:
-                        return
-                await session.close()
             except Exception as e:
                 print('From pearl: ')
                 print(e)
-                return
 
     async def getdot(self, device):
         async with aiohttp.ClientSession() as session:
@@ -180,13 +142,9 @@ class DeviceChecker(commands.Cog):
                         f'https://raw.githubusercontent.com/DotOS/ota_config/dot-p/{device}.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'DotOS\n'
-                    else:
-                        return
-                await session.close()
             except Exception as e:
                 print('From dot: ')
                 print(e)
-                return
 
     async def getviper(self, device):
         async with aiohttp.ClientSession() as session:
@@ -195,31 +153,22 @@ class DeviceChecker(commands.Cog):
                         f'https://raw.githubusercontent.com/Viper-Devices/official_devices/master/{device}/build.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'ViperOS\n'
-                    else:
-                        return
-                await session.close()
             except Exception as e:
                 print('From viper: ')
                 print(e)
-                return
 
     async def getevo(self, device):
         if device == 'enchilada':
             return
-        elif device != 'enchilada':
-            try:
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(
-                            f'https://raw.githubusercontent.com/evolution-x/official_devices/master/builds/{device}.json') as fetch:
-                        if fetch.status == 200:
-                            self.reply_text += 'Evolution-X\n'
-                        else:
-                            return
-                    await session.close()
-            except Exception as e:
-                print('From evo: ')
-                print(e)
-                return
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(
+                        f'https://raw.githubusercontent.com/evolution-x/official_devices/master/builds/{device}.json') as fetch:
+                    if fetch.status == 200:
+                        self.reply_text += 'Evolution-X\n'
+        except Exception as e:
+            print('From evo: ')
+            print(e)
 
     async def getpotato(self, device):
         async with aiohttp.ClientSession() as session:
@@ -229,13 +178,9 @@ class DeviceChecker(commands.Cog):
                     usr = await fetch.json()
                     if fetch.status == 200 and str(usr['response']) != '[]':
                         self.reply_text += "Potato Open Sauce Project \n"
-                    else:
-                        return
-                await session.close()
             except Exception as e:
                 print('From potat: ')
                 print(e)
-                return
 
     async def getcrdroid(self, device):
         async with aiohttp.ClientSession() as session:
@@ -247,13 +192,9 @@ class DeviceChecker(commands.Cog):
                     finddevice = soup.find(device)
                     if finddevice is not None:
                         self.reply_text += 'crDroid\n'
-                    else:
-                        return
-                await session.close()
             except Exception as e:
                 print('From crd: ')
                 print(e)
-                return
 
     async def getsyberia(self, device):
         if device == 'fajita':
@@ -262,53 +203,35 @@ class DeviceChecker(commands.Cog):
                     async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/ab/OnePlus6T.json') as fetch:
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
-                        else:
-                            return
-                await session.close()
             except Exception as e:
                 print('From syb: ')
                 print(e)
-                return
         elif device == 'enchilada':
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/ab/OnePlus6.json') as fetch:
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
-                        else:
-                            return
-                await session.close()
             except Exception as e:
                 print('From syb: ')
                 print(e)
-                return
-        elif device != 'fajita' or device != 'enchilada':
+        else:
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/a-only/{device}.json') as fetch:
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
-                        else:
-                            return
-                await session.close()
             except Exception as e:
                 print('From syb: ')
                 print(e)
-                return
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/ab/{device}.json') as fetch:
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
-                        else:
-                            return
-                await session.close()
             except Exception as e:
                 print('From syb: ')
                 print(e)
-                return
-        else:
-            return
 
     async def getrr(self, device):
         try:
@@ -316,13 +239,9 @@ class DeviceChecker(commands.Cog):
                 async with session.get(f'https://raw.githubusercontent.com/ResurrectionRemix-Devices/api/master/{device}.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'Resurrection Remix \n'
-                    else:
-                        return
-            await session.close()
         except Exception as e:
             print('From rr: ')
             print(e)
-            return
 
     async def getrevenge(self, device):
         try:
@@ -330,13 +249,9 @@ class DeviceChecker(commands.Cog):
                 async with session.get(f'https://raw.githubusercontent.com/RevengeOS/releases/master/{device}.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'RevengeOS\n'
-                    else:
-                        return
-            await session.close()
         except Exception as e:
             print('From getrevenge:')
             print(e)
-            return
 
     async def getsuperior(self, device):
         try:
@@ -344,13 +259,9 @@ class DeviceChecker(commands.Cog):
                 async with session.get(f'https://raw.githubusercontent.com/SuperiorOS/official_devices/pie/{device}.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'SuperiorOS\n'
-                    else:
-                        return
-            await session.close()
         except Exception as e:
             print('From getsuperior')
             print(e)
-            return
 
     @commands.command(name="roms")
     async def devicechecker(self, ctx, device=None):
@@ -360,7 +271,7 @@ class DeviceChecker(commands.Cog):
             embed = discord.Embed(title="Available ROMs", description=f"{roms}", color=0x5eff72)
             embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
             await ctx.send(embed=embed)
-        elif device is not None:
+        else:
             await self.getaexoreo(device)
             await self.getaexpie(device)
             await self.getbtlg(device)
@@ -384,12 +295,9 @@ class DeviceChecker(commands.Cog):
                                       color=embedcolor)
                 embed.set_footer(text=embedfooter)
                 await ctx.send(embed=embed)
-                self.reply_text = ''
-                return
-            elif self.reply_text == '':
+            else:
                 await ctx.send('No available supported ROMs for device. <:harold:498881491368017930>')
-                self.reply_text = ''
-                return
+            self.reply_text = ''
 
 
 def setup(bot):
