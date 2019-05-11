@@ -1,6 +1,7 @@
 from discord.ext import commands
 import discord
 import aiohttp
+import asyncio
 from bs4 import BeautifulSoup
 
 embedcolor = 0x5eff72
@@ -263,6 +264,27 @@ class DeviceChecker(commands.Cog):
             print('From getsuperior')
             print(e)
 
+    async def parallel(self, device):
+        await asyncio.gather(
+            self.getaexoreo(device),
+            self.getaexpie(device),
+            self.getbtlg(device),
+            self.getcrdroid(device),
+            self.getdot(device),
+            self.getevo(device),
+            self.gethavoc(device),
+            self.getlineage(device),
+            self.getpe(device),
+            self.getpearl(device),
+            self.getpixys(device),
+            self.getpotato(device),
+            self.getrevenge(device),
+            self.getrr(device),
+            self.getsuperior(device),
+            self.getsyberia(device),
+            self.getviper(device)
+        )
+
     @commands.command(name="roms")
     async def devicechecker(self, ctx, device=None):
         if "@everyone" in ctx.message.content or "@here" in ctx.message.content or ctx.message.mention_everyone:
@@ -272,23 +294,7 @@ class DeviceChecker(commands.Cog):
             embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
             await ctx.send(embed=embed)
         else:
-            await self.getaexoreo(device)
-            await self.getaexpie(device)
-            await self.getbtlg(device)
-            await self.getcrdroid(device)
-            await self.getdot(device)
-            await self.getevo(device)
-            await self.gethavoc(device)
-            await self.getlineage(device)
-            await self.getpe(device)
-            await self.getpearl(device)
-            await self.getpixys(device)
-            await self.getpotato(device)
-            await self.getrevenge(device)
-            await self.getrr(device)
-            await self.getsuperior(device)
-            await self.getsyberia(device)
-            await self.getviper(device)
+            await self.parallel(device)
             if self.reply_text != '':
                 embed = discord.Embed(title=f"Available ROMs for {device}",
                                       description=self.reply_text,
