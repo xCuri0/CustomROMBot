@@ -320,17 +320,17 @@ class ROMResolver(commands.Cog):
                     await ctx.send('No builds for device <:harold:498881491368017930>')
 
     @commands.command(aliases=['potato'])
-    async def posp(self, ctx, phone: str):
+    async def posp(self, ctx, phone: str, channel='weekly'):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
+            async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type={channel}') as fetch:
                 if fetch.status == 200:
                     usr = await fetch.json()
                     if str(usr['response']) != "[]":
-                        await self.getposp(ctx, device)
+                        await self.getposp(ctx, device, channel)
                     elif str(usr['response']) == '[]':
                         device = phone.upper()
-                        await self.getposp(ctx, device)
+                        await self.getposp(ctx, device, channel)
                 else:
                     await ctx.send('No builds for device <:harold:498881491368017930>')
 
