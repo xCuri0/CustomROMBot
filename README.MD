@@ -3,15 +3,21 @@ Can show latest builds from official devices for each respective supported roms.
 
 prefix: !
 #### Supported ROMS:
-* LineageOS
-* DotOS
-* Evolution-X
-* HavocOS
-* Pearl
-* PixysOS
-* Potato Open Sauce Project
-* ViperOS
-* Pixel Experience
+* AOSP Extended (aex)
+* BootleggersROM (btlg/bootleggers)
+* crDroid (crdroid)
+* DotOS (dotos)
+* Evolution-X (evo)
+* HavocOS (havoc)
+* LineageOS (los/lineage)
+* PearlOS (pearl)
+* Pixel Experience (pe)
+* PixysOS (pixy)
+* Potato Open Sauce Project (posp)
+* Resurrection Remix (rr)
+* RevengeOS(revenge)
+* SuperiorOS(superior)
+* Syberia (syberia)
 
 ### How to setup:
 ##### On Windows:
