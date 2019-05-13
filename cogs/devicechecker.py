@@ -172,16 +172,20 @@ class DeviceChecker(commands.Cog):
             print(e)
 
     async def getpotato(self, device):
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as session:
             try:
                 async with session.get(
                         f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
                     usr = await fetch.json()
-                    if fetch.status == 200 and str(usr['response']) != '[]':
-                        self.reply_text += "Potato Open Sauce Project \n"
+            except aiohttp.ClientConnectionError:
+                async with session.get(
+                        f'http://api.strangebits.co.in/checkUpdate?device={device}&type=weekly') as fetch:
+                    usr = await fetch.json()
             except Exception as e:
-                print('From potat: ')
+                print('From getpotato:')
                 print(e)
+            if fetch.status == 200 and str(usr['response']) != '[]':
+                self.reply_text += "Potato Open Sauce Project \n"
 
     async def getcrdroid(self, device):
         async with aiohttp.ClientSession() as session:

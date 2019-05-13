@@ -5,6 +5,7 @@ from datetime import date
 import aiohttp
 import lxml
 from bs4 import BeautifulSoup
+import asyncio
 
 embedcolor = 0x5eff72
 embedfooter = "Bot by Keikei14 | Keikei14#7950"
@@ -298,41 +299,49 @@ class ROMResolver(commands.Cog):
                     await ctx.send("Device not found! <:harold:498881491368017930>")
 
     async def getposp(self, ctx, device, channel='weekly'):
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type={channel}') as fetch:
-                if fetch.status == 200:
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as session:
+            try:
+                async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type={channel}') as fetch:
                     usr = await fetch.json()
-                    if str(usr['response']) != "[]":
-                        builddate = date.fromtimestamp(usr['response'][-1]['datetime'])
-                        filesize = size(int(usr['response'][-1]['size']))
-                        valued = f"**Build Date**: `{builddate}`\n" \
-                                 f"**Size**: `{filesize}`\n" \
-                                 f"**Version**: `{usr['response'][-1]['version']}`\n" \
-                                 f"**Download**: [{usr['response'][-1]['filename']}]({usr['response'][-1]['url']})"
-                        embed = discord.Embed(title=f"Potato Open Sauce Project | {device}",
-                                              description=valued,
-                                              color=embedcolor)
-                        embed.set_footer(text=embedfooter)
-                        await ctx.send(embed=embed)
+                    downloadlink = usr['response'][-1]['url']
+            except aiohttp.ClientConnectionError:
+                async with session.get(
+                        f'http://api.strangebits.co.in/checkUpdate?device={device}&type={channel}') as fetch:
+                    usr = await fetch.json()
+                    if channel == 'mashed':
+                        downloadlink = f"https://mirror.sidsun.com/__private__/{device}/{usr['response'][-1]['filename']}"
                     else:
-                        await ctx.send('No builds for device <:harold:498881491368017930>')
-                else:
-                    await ctx.send('No builds for device <:harold:498881491368017930>')
+                        downloadlink = f"https://mirror.sidsun.com/{device}/{usr['response'][-1]['filename']}"
+            if str(usr['response']) != "[]":
+                builddate = date.fromtimestamp(usr['response'][-1]['datetime'])
+                filesize = size(int(usr['response'][-1]['size']))
+                valued = f"**Build Date**: `{builddate}`\n" \
+                         f"**Size**: `{filesize}`\n" \
+                         f"**Version**: `{usr['response'][-1]['version']}`\n" \
+                         f"**Download**: [{usr['response'][-1]['filename']}]({downloadlink})"
+                embed = discord.Embed(title=f"Potato Open Sauce Project | {device}",
+                                      description=valued,
+                                      color=embedcolor)
+                embed.set_footer(text=embedfooter)
+                await ctx.send(embed=embed)
+            else:
+                await ctx.send('No builds for device <:harold:498881491368017930>')
 
     @commands.command(aliases=['potato'])
     async def posp(self, ctx, phone: str, channel='weekly'):
         device = phone.lower()
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type={channel}') as fetch:
-                if fetch.status == 200:
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as session:
+            try:
+                async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type={channel}') as fetch:
                     usr = await fetch.json()
-                    if str(usr['response']) != "[]":
-                        await self.getposp(ctx, device, channel)
-                    elif str(usr['response']) == '[]':
-                        device = phone.upper()
-                        await self.getposp(ctx, device, channel)
-                else:
-                    await ctx.send('No builds for device <:harold:498881491368017930>')
+            except aiohttp.ClientConnectionError:
+                async with session.get(f'http://api.strangebits.co.in/checkUpdate?device={device}&type={channel}') as fetch:
+                    usr = await fetch.json()
+            if str(usr['response']) != "[]":
+                await self.getposp(ctx, device, channel)
+            elif str(usr['response']) == '[]':
+                device = phone.upper()
+                await self.getposp(ctx, device, channel)
 
     @commands.command(aliases=['evox'])
     async def evo(self, ctx, phone: str):
