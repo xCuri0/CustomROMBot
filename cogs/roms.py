@@ -265,12 +265,23 @@ class ROMResolver(commands.Cog):
             async with session.get(f'https://raw.githubusercontent.com/Viper-Devices/official_devices/master/{device}/build.json') as fetch:
                 if fetch.status == 200:
                     usr = await fetch.json(content_type=None)
-                    filesize = size(int(usr['response'][0]['size']))
-                    builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
-                    valued = f"**Build date**: `{builddate}`\n" \
-                        f"**Size**: `{filesize}`\n" \
-                        f"**Version**: `{usr['response'][0]['version']}`\n" \
-                        f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
+                    try:
+                        filesize = size(int(usr['size']))
+                        builddate = date.fromtimestamp(int(usr['datetime']))
+                        valued = f"**Build date**: `{builddate}`\n" \
+                            f"**Size**: `{filesize}`\n" \
+                            f"**Version**: `{usr['version']}`\n" \
+                            f"**Download**: [{usr['filename']}]({usr['url']})"
+                    except KeyError:
+                        filesize = size(int(usr['size']))
+                        builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
+                        valued = f"**Build date**: `{builddate}`\n" \
+                            f"**Size**: `{filesize}`\n" \
+                            f"**Version**: `{usr['response'][0]['version']}`\n" \
+                            f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
+                    except Exception as e:
+                        print('from getviper:')
+                        print(e)
                     embed = discord.Embed(title=f"ViperOS | {device}",
                                           description=valued,
                                           color=embedcolor)
