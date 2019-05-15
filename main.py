@@ -5,7 +5,7 @@ import private_stuff
 
 prefix = "!"
 
-bot = commands.Bot(command_prefix=prefix, case_insensitive=True)
+bot = commands.Bot(command_prefix=prefix, case_insensitive=True, owner_id=177426944063700995)
 
 startup_extensions = os.listdir("./cogs")
 if "__pycache__" in startup_extensions:
@@ -72,6 +72,16 @@ async def help(ctx):
         await ctx.author.send(embed=embed)
     except:
         await ctx.send(f'Oh no! I can\'t DM {ctx.author.name}!')
+
+
+@bot.command()
+@commands.is_owner()
+async def say(ctx, *, message):
+    if "@everyone" in message or "@here" in message or ctx.message.mention_everyone:
+        return await ctx.message.delete()
+    else:
+        await ctx.message.delete()
+        await ctx.send(message)
 
 
 bot.run(private_stuff.token, bot=True, reconnect=True)
