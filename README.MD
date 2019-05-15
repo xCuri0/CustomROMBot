@@ -4,6 +4,7 @@ Can show latest builds from official devices for each respective supported roms.
 prefix: !
 #### Supported ROMS:
 * AOSP Extended (aex)
+* Android Open Source illusion Project (aosip)
 * BootleggersROM (btlg/bootleggers)
 * crDroid (crdroid)
 * DotOS (dotos)

@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 embedcolor = 0x5eff72
 embedfooter = "Bot by Keikei14 | Keikei14#7950"
 roms = 'AOSP Extended (aex) \n' \
+       'Android Open Source illusion Project (aosip)\n' \
        'BootleggersROM (btlg/bootleggers) \n' \
        'crDroid (crdroid)\n' \
        'DotOS (dotos)\n' \
@@ -268,6 +269,17 @@ class DeviceChecker(commands.Cog):
             print('From getsuperior')
             print(e)
 
+    async def getaosip(self, device):
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f'http://aosip.dev/{device}/official') as fetch:
+                    usr = await fetch.json()
+                    if str(usr['response']) != '[]':
+                        self.reply_text += 'AOSiP\n'
+        except Exception as e:
+            print('from getaosip')
+            print(e)
+
     async def parallel(self, device):
         await asyncio.gather(
             self.getaexoreo(device),
@@ -286,7 +298,8 @@ class DeviceChecker(commands.Cog):
             self.getrr(device),
             self.getsuperior(device),
             self.getsyberia(device),
-            self.getviper(device)
+            self.getviper(device),
+            self.getaosip(device)
         )
 
     @commands.command(name="roms")

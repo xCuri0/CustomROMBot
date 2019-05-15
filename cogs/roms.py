@@ -169,7 +169,7 @@ class ROMResolver(commands.Cog):
             async with session.get(f'https://download.lineageos.org/api/v1/{device}/nightly/*') as fetch:
                     usr = await fetch.json()
                     if str(usr['response']) != "[]":
-                        filesize = size(usr['response'][0]['size'])
+                        filesize = size(usr['response'][-1]['size'])
                         builddate = date.fromtimestamp(usr['response'][-1]['datetime'])
                         valued = f"**Build date**: `{builddate}`\n" \
                             f"**Size**: `{filesize}`\n" \
@@ -337,6 +337,25 @@ class ROMResolver(commands.Cog):
                 await ctx.send(embed=embed)
             else:
                 await ctx.send('No builds for device <:harold:498881491368017930>')
+
+    async def getaosip(self, ctx, device, version):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://aosip.dev/{device}/{version}') as fetch:
+                usr = await fetch.json()
+                if fetch.status == 200 and str(usr['response']) != '':
+                    builddate = date.fromtimestamp(usr['response'][0]['datetime'])
+                    filesize = size(int(usr['response'][0]['size']))
+                    valued = f"**Build Date**: `{builddate}`\n" \
+                        f"**Size**: `{filesize}`\n" \
+                        f"**Version**: `{usr['response'][0]['version']}`\n" \
+                        f"**Download**: [{usr['response'][0]['filename']}]({usr['response'][0]['url']})"
+                    embed = discord.Embed(title=f"AOSiP | {device}",
+                                          description=valued,
+                                          color=embedcolor)
+                    embed.set_footer(text=embedfooter)
+                    await ctx.send(embed=embed)
+                else:
+                    await ctx.send('No builds for device <:harold:498881491368017930>')
 
     @commands.command(aliases=['potato'])
     async def posp(self, ctx, phone: str, channel='weekly'):
@@ -600,6 +619,17 @@ class ROMResolver(commands.Cog):
             print('From Superior:')
             print(e)
             return
+
+    @commands.command()
+    async def aosip(self, ctx, phone, version='official'):
+        device = phone.lower()
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'http://aosip.dev/{device}/{version}') as fetch:
+                if fetch.status == 200:
+                    await self.getaosip(ctx, device, version)
+                else:
+                    device = phone.upper()
+                    await self.getaosip(ctx, device, version)
 
 
 def setup(bot):

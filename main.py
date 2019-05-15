@@ -16,6 +16,7 @@ loaded_extensions = []
 bot.remove_command("help")
 
 roms = 'AOSP Extended (aex) \n' \
+       'Android Open Source illusion Project (aosip)\n' \
        'BootleggersROM (btlg/bootleggers) \n' \
        'crDroid (crdroid)\n' \
        'DotOS (dotos)\n' \
