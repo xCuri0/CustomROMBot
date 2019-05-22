@@ -70,6 +70,8 @@ async def help(ctx):
                                                                "Example: `!pe tissot oreo`", inline=False)
     embed.add_field(name='Magisk', value='gets latest Magisk version (stable/canary/beta)\n'
                                          'Usage: `!magisk (beta/canary/stable)`')
+    embed.add_field(name='OpenGAPPS', value='gets latest OpenGAPPS build\n'
+                                            'Usage: `!gapps (arch) (android version) (gapps variant)`')
     embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
     try:
         await ctx.author.send(embed=embed)
