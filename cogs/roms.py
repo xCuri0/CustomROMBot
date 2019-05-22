@@ -273,7 +273,7 @@ class ROMResolver(commands.Cog):
                             f"**Version**: `{usr['version']}`\n" \
                             f"**Download**: [{usr['filename']}]({usr['url']})"
                     except KeyError:
-                        filesize = size(int(usr['size']))
+                        filesize = size(int(usr['response'][0]['size']))
                         builddate = date.fromtimestamp(int(usr['response'][0]['datetime']))
                         valued = f"**Build date**: `{builddate}`\n" \
                             f"**Size**: `{filesize}`\n" \
