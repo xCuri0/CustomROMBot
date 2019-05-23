@@ -24,12 +24,12 @@ roms = 'AOSP Extended (aex) \n' \
        'Syberia (syberia)\n' \
        'ViperOS (viper)\n'
 
-
 class DeviceChecker(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     reply_text = ''
+    check = False
 
     async def getaexoreo(self, device):
         async with aiohttp.ClientSession() as session:
@@ -273,7 +273,7 @@ class DeviceChecker(commands.Cog):
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'http://aosip.dev/{device}/official') as fetch:
-                    usr = await fetch.json()
+                    usr = await fetch.json(encoding=None)
                     if str(usr['response']) != '[]':
                         self.reply_text += 'AOSiP\n'
         except Exception as e:
@@ -281,6 +281,7 @@ class DeviceChecker(commands.Cog):
             print(e)
 
     async def parallel(self, device):
+        self.check = True
         await asyncio.gather(
             self.getaexoreo(device),
             self.getaexpie(device),
@@ -311,15 +312,19 @@ class DeviceChecker(commands.Cog):
             embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
             await ctx.send(embed=embed)
         else:
+            if self.check is True:
+                return
             await self.parallel(device)
-            if self.reply_text != '':
+            if self.reply_text != '' and self.check is True:
                 embed = discord.Embed(title=f"Available ROMs for {device}",
                                       description=self.reply_text,
                                       color=embedcolor)
                 embed.set_footer(text=embedfooter)
                 await ctx.send(embed=embed)
+                self.check = False
             else:
                 await ctx.send('No available supported ROMs for device. <:harold:498881491368017930>')
+                self.check = False
             self.reply_text = ''
 
 
