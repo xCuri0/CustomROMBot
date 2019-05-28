@@ -31,9 +31,10 @@ class DeviceChecker(commands.Cog):
 
     reply_text = ''
     check = False
+    timeout = aiohttp.ClientTimeout(total=3)
 
     async def getaexoreo(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get(f'https://api.aospextended.com/ota/{device}/pie') as fetch:
                     usr = await fetch.json(content_type=None)
@@ -44,7 +45,7 @@ class DeviceChecker(commands.Cog):
                 print(e)
 
     async def getaexpie(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get(f'https://api.aospextended.com/ota/{device}/oreo') as fetch:
                     usr = await fetch.json(content_type=None)
@@ -55,7 +56,7 @@ class DeviceChecker(commands.Cog):
                 print(e)
 
     async def getbtlg(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get('https://bootleggersrom-devices.github.io/api/devices.json') as devices:
                     if devices.status == 200:
@@ -67,34 +68,34 @@ class DeviceChecker(commands.Cog):
                 print(e)
 
     async def getpe(self, device):
-            try:
-                async with aiohttp.ClientSession(timeout=3) as session:
-                    async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie') as fetch:
-                        usr = await fetch.json()
-                        if not usr['error']:
-                            self.reply_text += 'Pixel Experience (Pie)\n'
-            except:
-                return
-            try:
-                async with aiohttp.ClientSession(timeout=3) as session:
-                    async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie_caf') as fetch:
-                        usr = await fetch.json()
-                        if not usr['error']:
-                            self.reply_text += 'Pixel Experience (Pie-CAF)\n'
-            except:
-                return
-            try:
-                async with aiohttp.ClientSession(timeout=3) as session:
-                    async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/oreo') as fetch:
-                        usr = await fetch.json()
-                        if not usr['error']:
-                            self.reply_text += 'Pixel Experience (Oreo)\n'
-            except Exception as e:
-                print('From pe: ')
-                print(e)
+        try:
+            async with aiohttp.ClientSession(timeout=self.timeout) as session:
+                async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie') as fetch:
+                    usr = await fetch.json()
+                    if not usr['error']:
+                        self.reply_text += 'Pixel Experience (Pie)\n'
+        except:
+            return
+        try:
+            async with aiohttp.ClientSession(timeout=self.timeout) as session:
+                async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie_caf') as fetch:
+                    usr = await fetch.json()
+                    if not usr['error']:
+                        self.reply_text += 'Pixel Experience (Pie-CAF)\n'
+        except:
+            return
+        try:
+            async with aiohttp.ClientSession(timeout=self.timeout) as session:
+                async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/oreo') as fetch:
+                    usr = await fetch.json()
+                    if not usr['error']:
+                        self.reply_text += 'Pixel Experience (Oreo)\n'
+        except Exception as e:
+            print('From pe: ')
+            print(e)
 
     async def getlineage(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get(f'https://download.lineageos.org/api/v1/{device}/nightly/*') as fetch:
                     usr = await fetch.json()
@@ -105,7 +106,7 @@ class DeviceChecker(commands.Cog):
                 print(e)
 
     async def gethavoc(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get(
                         f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json') as fetch:
@@ -118,7 +119,7 @@ class DeviceChecker(commands.Cog):
                 print(e)
 
     async def getpixys(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get(
                         f'https://raw.githubusercontent.com/PixysOS-Devices/official_devices/master/{device}/build.json') as fetch:
@@ -129,7 +130,7 @@ class DeviceChecker(commands.Cog):
                 print(e)
 
     async def getpearl(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get(f'https://raw.githubusercontent.com/PearlOS/OTA/master/{device}.json') as fetch:
                     if fetch.status == 200:
@@ -139,7 +140,7 @@ class DeviceChecker(commands.Cog):
                 print(e)
 
     async def getdot(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get(
                         f'https://raw.githubusercontent.com/DotOS/ota_config/dot-p/{device}.json') as fetch:
@@ -150,7 +151,7 @@ class DeviceChecker(commands.Cog):
                 print(e)
 
     async def getviper(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get(
                         f'https://raw.githubusercontent.com/Viper-Devices/official_devices/master/{device}/build.json') as fetch:
@@ -164,7 +165,7 @@ class DeviceChecker(commands.Cog):
         if device == 'enchilada':
             return
         try:
-            async with aiohttp.ClientSession(timeout=3) as session:
+            async with aiohttp.ClientSession(timeout=self.timeout) as session:
                 async with session.get(
                         f'https://raw.githubusercontent.com/evolution-x/official_devices/master/builds/{device}.json') as fetch:
                     if fetch.status == 200:
@@ -173,24 +174,24 @@ class DeviceChecker(commands.Cog):
             print('From evo: ')
             print(e)
 
-    async def getpotato(self, device):
-        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), timeout=3) as session:
-            try:
-                async with session.get(
-                        f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
-                    usr = await fetch.json()
-            except aiohttp.ClientConnectionError:
-                async with session.get(
-                        f'http://api.strangebits.co.in/checkUpdate?device={device}&type=weekly') as fetch:
-                    usr = await fetch.json()
-            except Exception as e:
-                print('From getpotato:')
-                print(e)
-            if fetch.status == 200 and str(usr['response']) != '[]':
-                self.reply_text += "Potato Open Sauce Project \n"
+    #async def getpotato(self, device):
+        #async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), timeout=3) as session:
+            #try:
+                #async with session.get(
+                        #f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
+                    #usr = await fetch.json()
+            #except aiohttp.ClientConnectionError:
+                #async with session.get(
+                        #f'http://api.strangebits.co.in/checkUpdate?device={device}&type=weekly') as fetch:
+                    #usr = await fetch.json()
+            #except Exception as e:
+                #print('From getpotato:')
+                #print(e)
+            #if fetch.status == 200 and str(usr['response']) != '[]':
+                #self.reply_text += "Potato Open Sauce Project \n"
 
     async def getcrdroid(self, device):
-        async with aiohttp.ClientSession(timeout=3) as session:
+        async with aiohttp.ClientSession(timeout=self.timeout) as session:
             try:
                 async with session.get(
                         'https://raw.githubusercontent.com/crdroidandroid/android_vendor_crDroidOTA/9.0/update.xml') as fetch:
@@ -206,7 +207,7 @@ class DeviceChecker(commands.Cog):
     async def getsyberia(self, device):
         if device == 'fajita':
             try:
-                async with aiohttp.ClientSession(timeout=3) as session:
+                async with aiohttp.ClientSession(timeout=self.timeout) as session:
                     async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/ab/OnePlus6T.json') as fetch:
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
@@ -215,7 +216,7 @@ class DeviceChecker(commands.Cog):
                 print(e)
         elif device == 'enchilada':
             try:
-                async with aiohttp.ClientSession(timeout=3) as session:
+                async with aiohttp.ClientSession(timeout=self.timeout) as session:
                     async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/ab/OnePlus6.json') as fetch:
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
@@ -224,7 +225,7 @@ class DeviceChecker(commands.Cog):
                 print(e)
         else:
             try:
-                async with aiohttp.ClientSession(timeout=3) as session:
+                async with aiohttp.ClientSession(timeout=self.timeout) as session:
                     async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/a-only/{device}.json') as fetch:
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
@@ -232,7 +233,7 @@ class DeviceChecker(commands.Cog):
                 print('From syb: ')
                 print(e)
             try:
-                async with aiohttp.ClientSession(timeout=3) as session:
+                async with aiohttp.ClientSession(timeout=self.timeout) as session:
                     async with session.get(f'https://raw.githubusercontent.com/syberia-project/official_devices/master/ab/{device}.json') as fetch:
                         if fetch.status == 200:
                             self.reply_text += 'Syberia\n'
@@ -242,7 +243,7 @@ class DeviceChecker(commands.Cog):
 
     async def getrr(self, device):
         try:
-            async with aiohttp.ClientSession(timeout=3) as session:
+            async with aiohttp.ClientSession(timeout=self.timeout) as session:
                 async with session.get(f'https://raw.githubusercontent.com/ResurrectionRemix-Devices/api/master/{device}.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'Resurrection Remix \n'
@@ -252,7 +253,7 @@ class DeviceChecker(commands.Cog):
 
     async def getrevenge(self, device):
         try:
-            async with aiohttp.ClientSession(timeout=3) as session:
+            async with aiohttp.ClientSession(timeout=self.timeout) as session:
                 async with session.get(f'https://raw.githubusercontent.com/RevengeOS/releases/master/{device}.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'RevengeOS\n'
@@ -262,7 +263,7 @@ class DeviceChecker(commands.Cog):
 
     async def getsuperior(self, device):
         try:
-            async with aiohttp.ClientSession(timeout=3) as session:
+            async with aiohttp.ClientSession(timeout=self.timeout) as session:
                 async with session.get(f'https://raw.githubusercontent.com/SuperiorOS/official_devices/pie/{device}.json') as fetch:
                     if fetch.status == 200:
                         self.reply_text += 'SuperiorOS\n'
@@ -272,7 +273,7 @@ class DeviceChecker(commands.Cog):
 
     async def getaosip(self, device):
         try:
-            async with aiohttp.ClientSession(timeout=3) as session:
+            async with aiohttp.ClientSession(timeout=self.timeout) as session:
                 async with session.get(f'http://aosip.dev/{device}/official') as fetch:
                     usr = await fetch.json(encoding=None)
                     if str(usr['response']) != '[]':
@@ -295,7 +296,6 @@ class DeviceChecker(commands.Cog):
             self.getpe(device),
             self.getpearl(device),
             self.getpixys(device),
-            self.getpotato(device),
             self.getrevenge(device),
             self.getrr(device),
             self.getsuperior(device),
