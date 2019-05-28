@@ -117,10 +117,15 @@ class ROMResolver(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(f"https://bootleggersrom-devices.github.io/api/devices.json") as devices:
                 usr = await devices.json()
+                filename = usr[device]['filename']
+                splitname = filename.split('-')
+                for i in splitname:
+                    if i.startswith('20'):
+                        date = i
                 if device not in usr:
                     await ctx.send('No builds for device. <:harold:498881491368017930>')
                 elif device in usr:
-                    valued = f"**Build date**: `{usr[device]['buildate']}`\n" \
+                    valued = f"**Build date**: `{date}`\n" \
                              f"**Download**: [{usr[device]['filename']}]({usr[device]['download']})"
                     embed = discord.Embed(title=f"BootleggersROM | {device}",
                                           description=valued,
