@@ -464,27 +464,28 @@ class DeviceChecker(commands.Cog):
 
     @commands.command(name="roms")
     async def devicechecker(self, ctx, device=None):
-        if "@everyone" in ctx.message.content or "@here" in ctx.message.content or ctx.message.mention_everyone:
-            return await ctx.send('NO EVERYONE-ING HERE!')
-        if device is None:
-            embed = discord.Embed(title="Available ROMs", description=f"{roms}", color=0x5eff72)
-            embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
-            await ctx.send(embed=embed)
-        else:
-            if self.check is True:
-                return
-            await self.parallel(device)
-            if self.reply_text != '' and self.check is True:
-                embed = discord.Embed(title=f"Available ROMs for {device}",
-                                      description=self.reply_text,
-                                      color=embedcolor)
-                embed.set_footer(text=embedfooter)
+        async with ctx.typing():
+            if "@everyone" in ctx.message.content or "@here" in ctx.message.content or ctx.message.mention_everyone:
+                return await ctx.send('NO EVERYONE-ING HERE!')
+            if device is None:
+                embed = discord.Embed(title="Available ROMs", description=f"{roms}", color=0x5eff72)
+                embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
                 await ctx.send(embed=embed)
-                self.check = False
             else:
-                await ctx.send('No available supported ROMs for device. <:harold:498881491368017930>')
-                self.check = False
-            self.reply_text = ''
+                if self.check is True:
+                    return
+                await self.parallel(device)
+                if self.reply_text != '' and self.check is True:
+                    embed = discord.Embed(title=f"Available ROMs for {device}",
+                                          description=self.reply_text,
+                                          color=embedcolor)
+                    embed.set_footer(text=embedfooter)
+                    await ctx.send(embed=embed)
+                    self.check = False
+                else:
+                    await ctx.send('No available supported ROMs for device. <:harold:498881491368017930>')
+                    self.check = False
+                self.reply_text = ''
 
 
 def setup(bot):
