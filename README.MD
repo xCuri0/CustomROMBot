@@ -27,9 +27,9 @@ prefix: !
 py -3 -m pip install -r requirements.txt
 ```
 
-Then make a private_stuff.py in the same directory as main.py and put your token there like:
+Then add an environment variable for your token:
 ```
-token = (insert token here)
+export token=(token here)
 ```
 
 ### How to use:

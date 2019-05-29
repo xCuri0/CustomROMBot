@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 import os
-import private_stuff
 import asyncio
 import sys
 
@@ -95,5 +94,4 @@ async def restart(ctx):
     await ctx.send(f'{bot.user.name} is restarting...')
     os.execl(sys.executable, sys.executable, *sys.argv)
 
-
-bot.run(private_stuff.token, bot=True, reconnect=True)
+bot.run(os.environ['token'], bot=True, reconnect=True)
