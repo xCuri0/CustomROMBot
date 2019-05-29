@@ -258,21 +258,40 @@ class DeviceChecker(commands.Cog):
             print('From evo: ')
             print(e)
 
-    #async def getpotato(self, device):
-        #async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), timeout=3) as session:
-            #try:
-                #async with session.get(
-                        #f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
-                    #usr = await fetch.json()
-            #except aiohttp.ClientConnectionError:
-                #async with session.get(
-                        #f'http://api.strangebits.co.in/checkUpdate?device={device}&type=weekly') as fetch:
-                    #usr = await fetch.json()
-            #except Exception as e:
-                #print('From getpotato:')
-                #print(e)
-            #if fetch.status == 200 and str(usr['response']) != '[]':
-                #self.reply_text += "Potato Open Sauce Project \n"
+    async def getpotato(self, device: str):
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), timeout=3) as session:
+            try:
+                async with session.get(
+                        f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
+                    usr = await fetch.json()
+                    if fetch.status == 200 and str(usr['response']) != '[]':
+                        self.reply_text += "Potato Open Sauce Project \n"
+                    elif fetch.status != 200 or str(usr['response']) == '[]':
+                        raise DeviceNotFoundError
+            except aiohttp.ClientConnectionError:
+                async with session.get(
+                        f'http://api.strangebits.co.in/checkUpdate?device={device}&type=weekly') as fetch:
+                    usr = await fetch.json()
+                    if fetch.status == 200 and str(usr['response']) != '[]':
+                        self.reply_text += "Potato Open Sauce Project \n"
+                    elif fetch.status != 200 or str(usr['response']) == '[]':
+                        raise DeviceNotFoundError
+            except DeviceNotFoundError:
+                try:
+                    async with session.get(
+                            f'https://api.potatoproject.co/checkUpdate?device={device.upper}&type=weekly') as fetch:
+                        usr = await fetch.json()
+                        if fetch.status == 200 and str(usr['response']) != '[]':
+                            self.reply_text += "Potato Open Sauce Project \n"
+                except aiohttp.ClientConnectionError:
+                    async with session.get(
+                            f'http://api.strangebits.co.in/checkUpdate?device={device.upper}&type=weekly') as fetch:
+                        usr = await fetch.json()
+                        if fetch.status == 200 and str(usr['response']) != '[]':
+                            self.reply_text += "Potato Open Sauce Project \n"
+            except Exception as e:
+                print('From getpotato:')
+                print(e)
 
     async def getcrdroid(self, device: str):
         async with aiohttp.ClientSession(timeout=self.timeout) as session:
