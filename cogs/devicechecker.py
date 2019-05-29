@@ -459,7 +459,8 @@ class DeviceChecker(commands.Cog):
             self.getsuperior(device),
             self.getsyberia(device),
             self.getviper(device),
-            self.getaosip(device)
+            self.getaosip(device),
+            self.getpotato(device)
         )
 
     @commands.command(name="roms")
