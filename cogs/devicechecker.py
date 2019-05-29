@@ -259,7 +259,7 @@ class DeviceChecker(commands.Cog):
             print(e)
 
     async def getpotato(self, device: str):
-        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), timeout=3) as session:
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), timeout=self.timeout) as session:
             try:
                 async with session.get(
                         f'https://api.potatoproject.co/checkUpdate?device={device}&type=weekly') as fetch:
