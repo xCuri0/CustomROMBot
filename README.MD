@@ -27,8 +27,18 @@ prefix: !
 ```
 py -3 -m pip install -r requirements.txt
 ```
+##### On Ubuntu/Linux:
+```
+python3 -m pip install -r requirements.txt
+```
 
 Then add an environment variable for your token:
+##### Windows:
+```
+setx token (token here) /M
+```
+
+##### Ubuntu/Linux:
 ```
 export token=(token here)
 ```
