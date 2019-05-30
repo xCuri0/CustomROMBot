@@ -3,22 +3,23 @@ Can show latest builds from official devices for each respective supported roms.
 
 prefix: !
 #### Supported ROMS:
-* AOSP Extended (aex)
-* Android Open Source illusion Project (aosip)
+* AOSP Extended (aex/aospextended)
+* Android Open Source illusion Project (aosip/illusion)
 * BootleggersROM (btlg/bootleggers)
 * crDroid (crdroid)
-* DotOS (dotos)
-* Evolution-X (evo)
-* HavocOS (havoc)
+* DotOS (dotos/dot)
+* Evolution-X (evo/evox/evolutionx)
+* HavocOS (havoc/havocos)
 * LineageOS (los/lineage)
 * PearlOS (pearl)
-* Pixel Experience (pe)
-* PixysOS (pixy)
-* Potato Open Sauce Project (posp)
-* Resurrection Remix (rr)
-* RevengeOS(revenge)
-* SuperiorOS(superior)
+* Pixel Experience (pe/pixelexperience)
+* PixysOS (pixy/pixys/pixysos)
+* Potato Open Sauce Project (posp/potato/potatorom)
+* Resurrection Remix (rr/ressurection/ressurectionremix/ressurectionremixos)
+* RevengeOS(revenge/revengeos)
+* SuperiorOS(superior/superioros)
 * Syberia (syberia)
+* ViperOS (viper/viperos)
 
 ### How to setup:
 ##### On Windows:

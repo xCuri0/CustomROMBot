@@ -6,23 +6,23 @@ from bs4 import BeautifulSoup
 
 embedcolor = 0x5eff72
 embedfooter = "Bot by Keikei14 | Keikei14#7950"
-roms = 'AOSP Extended (aex) \n' \
-       'Android Open Source illusion Project (aosip)\n' \
+roms = 'AOSP Extended (aex/aospextended) \n' \
+       'Android Open Source illusion Project (aosip/illusion)\n' \
        'BootleggersROM (btlg/bootleggers) \n' \
        'crDroid (crdroid)\n' \
-       'DotOS (dotos)\n' \
-       'Evolution-X (evo)\n' \
-       'HavocOS (havoc)\n' \
+       'DotOS (dotos/dot)\n' \
+       'Evolution-X (evo/evox/evolutionx)\n' \
+       'HavocOS (havoc/havocos)\n' \
        'LineageOS (los/lineage)\n' \
-       'PearlOS (pearl)\n' \
-       'Pixel Experience (pe) \n' \
-       'PixysOS (pixy)\n' \
-       'Potato Open Sauce Project (posp)\n' \
-       'Resurrection Remix (rr)\n' \
-       'RevengeOS(revenge)\n' \
-       'SuperiorOS(superior)\n' \
+       'PearlOS (pearl/pearlos)\n' \
+       'Pixel Experience (pe/pixelexperience) \n' \
+       'PixysOS (pixy/pixys/pixysos)\n' \
+       'Potato Open Sauce Project (posp/potato/potatorom)\n' \
+       'Resurrection Remix (rr/ressurection/ressurectionremix/ressurectionremixos/rros)\n' \
+       'RevengeOS(revenge/revengeos)\n' \
+       'SuperiorOS(superior/superioros)\n' \
        'Syberia (syberia)\n' \
-       'ViperOS (viper)\n'
+       'ViperOS (viper/viperos)\n'
 
 
 class DeviceNotFoundError(Exception):

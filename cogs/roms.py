@@ -362,7 +362,7 @@ class ROMResolver(commands.Cog):
                 else:
                     await ctx.send('No builds for device <:harold:498881491368017930>')
 
-    @commands.command(aliases=['potato'])
+    @commands.command(aliases=['potato', 'potatorom'])
     async def posp(self, ctx, phone: str, channel='weekly'):
         device = phone.lower()
         async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as session:
@@ -378,7 +378,7 @@ class ROMResolver(commands.Cog):
                 device = phone.upper()
                 await self.getposp(ctx, device, channel)
 
-    @commands.command(aliases=['evox'])
+    @commands.command(aliases=['evox', 'evolutionx'])
     async def evo(self, ctx, phone: str):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
@@ -389,7 +389,7 @@ class ROMResolver(commands.Cog):
                     device = phone.upper()
                     await self.getevo(ctx, device)
 
-    @commands.command()
+    @commands.command(aliases=['viperos'])
     async def viper(self, ctx, phone: str):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
@@ -402,7 +402,7 @@ class ROMResolver(commands.Cog):
                 else:
                     await ctx.send('Could not reach ViperOS servers. <:harold:498881491368017930>')
 
-    @commands.command()
+    @commands.command(aliases=['dot'])
     async def dotos(self, ctx, phone: str):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
@@ -413,7 +413,7 @@ class ROMResolver(commands.Cog):
                     device = phone.upper()
                     await self.getdotos(ctx, device)
 
-    @commands.command()
+    @commands.command(aliases=['pearlos'])
     async def pearl(self, ctx, phone: str):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
@@ -426,7 +426,7 @@ class ROMResolver(commands.Cog):
                 else:
                     await ctx.send('Could not reach PearlOS servers. <:harold:498881491368017930>')
 
-    @commands.command(aliases=['pixys'])
+    @commands.command(aliases=['pixys', 'pixysos'])
     async def pixy(self, ctx, phone):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
@@ -439,7 +439,7 @@ class ROMResolver(commands.Cog):
                 else:
                     await ctx.send('Could not reach PixysOS servers. <:harold:498881491368017930>')
 
-    @commands.command()
+    @commands.command(aliases=['havocos'])
     async def havoc(self, ctx, phone):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
@@ -465,7 +465,7 @@ class ROMResolver(commands.Cog):
                 else:
                     await ctx.send('Cannot connect to LineageOS servers. <:harold:498881491368017930>')
 
-    @commands.command()
+    @commands.command(aliases=['pixelexperience'])
     async def pe(self, ctx, phone, peversion=None):
         device = phone.lower()
         if peversion is None:
@@ -514,7 +514,7 @@ class ROMResolver(commands.Cog):
                 elif devices.status != 404:
                     await ctx.send("Couldn't reach Bootleggers API! <:harold:498881491368017930>")
 
-    @commands.command()
+    @commands.command(aliases=['aospextended'])
     async def aex(self, ctx, phone: str, version='pie'):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
@@ -580,7 +580,7 @@ class ROMResolver(commands.Cog):
                         usr = await fetch.json(content_type=None)
                         await self.getsyberia(ctx, device, usr, partition)
 
-    @commands.command()
+    @commands.command(aliases=['rros', 'ressurection', 'ressurectionremix', 'ressurectionremixos'])
     async def rr(self, ctx, phone):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
@@ -591,7 +591,7 @@ class ROMResolver(commands.Cog):
                 elif fetch.status == 200:
                     await self.getrr(ctx, device)
 
-    @commands.command()
+    @commands.command(aliases=['revengeos'])
     async def revenge(self, ctx, phone):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
@@ -609,7 +609,7 @@ class ROMResolver(commands.Cog):
                 print(e)
                 return
 
-    @commands.command()
+    @commands.command(aliases=['superioros'])
     async def superior(self, ctx, phone):
         device = phone.lower()
         try:
@@ -625,7 +625,7 @@ class ROMResolver(commands.Cog):
             print(e)
             return
 
-    @commands.command()
+    @commands.command(aliases=['illusion'])
     async def aosip(self, ctx, phone, version='official'):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:
