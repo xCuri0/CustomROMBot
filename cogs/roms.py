@@ -74,6 +74,7 @@ class ROMResolver(commands.Cog):
     async def getsyberia(self, ctx, device, usr, partition):
         if partition == 'a-only':
             valued = f"**Build date**: `{usr['build_date']}`\n" \
+                     f"**Size:** `{size(int(usr['filesize']))}`\n" \
                      f"**Download**: [{usr['filename']}]({usr['url']})"
             embed = discord.Embed(title=f"Syberia | {device}",
                                   description=valued,
@@ -580,7 +581,7 @@ class ROMResolver(commands.Cog):
                         usr = await fetch.json(content_type=None)
                         await self.getsyberia(ctx, device, usr, partition)
 
-    @commands.command(aliases=['rros', 'ressurection', 'ressurectionremix', 'ressurectionremixos'])
+    @commands.command(aliases=['rros', 'resurrection', 'resurrectionremix', 'resurrectionremixos'])
     async def rr(self, ctx, phone):
         device = phone.lower()
         async with aiohttp.ClientSession() as session:

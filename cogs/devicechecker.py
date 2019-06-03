@@ -18,7 +18,7 @@ roms = 'AOSP Extended (aex/aospextended) \n' \
        'Pixel Experience (pe/pixelexperience) \n' \
        'PixysOS (pixy/pixys/pixysos)\n' \
        'Potato Open Sauce Project (posp/potato/potatorom)\n' \
-       'Resurrection Remix (rr/ressurection/ressurectionremix/ressurectionremixos/rros)\n' \
+       'Resurrection Remix (rr/resurrection/resurrectionremix/resurrectionremixos/rros)\n' \
        'RevengeOS(revenge/revengeos)\n' \
        'SuperiorOS(superior/superioros)\n' \
        'Syberia (syberia)\n' \
