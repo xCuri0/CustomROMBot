@@ -71,7 +71,7 @@ async def help(ctx):
                                          'Usage: `!magisk (beta/canary/stable)`')
     embed.add_field(name='OpenGAPPS', value='gets latest OpenGAPPS build\n'
                                             'Usage: `!gapps (arch) (android version) (gapps variant)`')
-    embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
+    embed.set_footer(text="Bot by Keikei14 | Keikei14#7950 and IcyMiguel420 | icymiguel420#3599 and IcyMiguel420 | icymiguel420#3599")
     try:
         await ctx.author.send(embed=embed)
     except:

@@ -4,7 +4,7 @@ import aiohttp
 from hurry.filesize import size
 
 embedcolor = 0x5eff72
-embedfooter = "Bot by Keikei14 | Keikei14#7950"
+embedfooter = "Bot by Keikei14 | Keikei14#7950 and IcyMiguel420 | icymiguel420#3599"
 
 
 class GAppsResolver(commands.Cog):

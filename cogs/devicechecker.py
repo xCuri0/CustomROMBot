@@ -5,7 +5,7 @@ import asyncio
 from bs4 import BeautifulSoup
 
 embedcolor = 0x5eff72
-embedfooter = "Bot by Keikei14 | Keikei14#7950"
+embedfooter = "Bot by Keikei14 | Keikei14#7950 and IcyMiguel420 | icymiguel420#3599"
 roms = 'AOSP Extended (aex/aospextended) \n' \
        'Android Open Source illusion Project (aosip/illusion)\n' \
        'BootleggersROM (btlg/bootleggers) \n' \
@@ -470,11 +470,18 @@ class DeviceChecker(commands.Cog):
                 return await ctx.send('NO EVERYONE-ING HERE!')
             if device is None:
                 embed = discord.Embed(title="Available ROMs", description=f"{roms}", color=0x5eff72)
-                embed.set_footer(text="Bot by Keikei14 | Keikei14#7950")
+                embed.set_footer(text="Bot by Keikei14 | Keikei14#7950 and IcyMiguel420 | icymiguel420#3599")
                 await ctx.send(embed=embed)
             else:
                 if self.check is True:
                     return
+                if device == "memedo":
+                    device = "mido"
+                elif device == "ayy":
+                    device = "tissot"
+                elif device == "powo":
+                    device = "beryllium"
+
                 await self.parallel(device)
                 if self.reply_text != '' and self.check is True:
                     embed = discord.Embed(title=f"Available ROMs for {device}",
