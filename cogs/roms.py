@@ -15,6 +15,16 @@ class ROMResolver(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    def meme(self, device):
+        if device.lower() == "memedo":
+            return "mido"
+        elif device.lower() == "ayy":
+            return "tissot"
+        elif device.lower() == "powo":
+            return "beryllium"
+        else:
+            return device.lower()
+
     async def getsuperior(self, ctx, device):
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/SuperiorOS/official_devices/pie/{device}.json') as fetch:
@@ -365,7 +375,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['potato', 'potatorom'])
     async def posp(self, ctx, phone: str, channel='weekly'):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as session:
             try:
                 async with session.get(f'https://api.potatoproject.co/checkUpdate?device={device}&type={channel}') as fetch:
@@ -381,7 +391,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['evox', 'evolutionx'])
     async def evo(self, ctx, phone: str):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/evolution-x-devices/official_devices/master/builds/{device}.json') as fetch:
                 if fetch.status == 200:
@@ -392,7 +402,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['viperos'])
     async def viper(self, ctx, phone: str):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/Viper-Devices/official_devices/master/{device}/build.json') as fetch:
                 if fetch.status == 200:
@@ -405,7 +415,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['dot'])
     async def dotos(self, ctx, phone: str):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/DotOS/ota_config/dot-p/{device}.json') as fetch:
                 if fetch.status == 200:
@@ -416,7 +426,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['pearlos'])
     async def pearl(self, ctx, phone: str):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/PearlOS/OTA/master/{device}.json') as fetch:
                 if fetch.status == 200:
@@ -429,7 +439,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['pixys', 'pixysos'])
     async def pixy(self, ctx, phone):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/PixysOS-Devices/official_devices/master/{device}/build.json') as fetch:
                 if fetch.status == 404:
@@ -442,7 +452,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['havocos'])
     async def havoc(self, ctx, phone):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json') as fetch:
                 if fetch.status == 200:
@@ -453,7 +463,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['los', 'lineageos'])
     async def lineage(self, ctx, phone):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://download.lineageos.org/api/v1/{device}/nightly/*') as fetch:
                 if fetch.status == 200:
@@ -468,7 +478,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['pixelexperience'])
     async def pe(self, ctx, phone, peversion=None):
-        device = phone.lower()
+        device = self.meme(phone)
         if peversion is None:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://download.pixelexperience.org/ota_v2/{device}/pie') as fetch:
@@ -502,7 +512,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['btlg'])
     async def bootleggers(self, ctx, phone: str):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f"https://bootleggersrom-devices.github.io/api/devices.json") as devices:
                 if devices.status == 200:
@@ -517,7 +527,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['aospextended'])
     async def aex(self, ctx, phone: str, version='pie'):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.aospextended.com/ota/{device}/{version}') as fetch:
                 if fetch.status == 200:
@@ -535,7 +545,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command()
     async def crdroid(self, ctx, phone: str):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get('https://raw.githubusercontent.com/crdroidandroid/android_vendor_crDroidOTA/9.0/update.xml') as fetch:
                 if fetch.status == 200:
@@ -552,7 +562,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command()
     async def syberia(self, ctx, phone, partition="a-only"):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             if device == 'enchilada':
                 partition = 'ab'
@@ -583,7 +593,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['rros', 'resurrection', 'resurrectionremix', 'resurrectionremixos'])
     async def rr(self, ctx, phone):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/ResurrectionRemix-Devices/api/master/{device}.json') as fetch:
                 if fetch.status == 404:
@@ -594,7 +604,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['revengeos'])
     async def revenge(self, ctx, phone):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             try:
                 async with session.get(f'https://raw.githubusercontent.com/RevengeOS/releases/master/{device}.json') as fetch:
@@ -612,7 +622,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['superioros'])
     async def superior(self, ctx, phone):
-        device = phone.lower()
+        device = self.meme(phone)
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://raw.githubusercontent.com/SuperiorOS/official_devices/pie/{device}.json') as fetch:
@@ -628,7 +638,7 @@ class ROMResolver(commands.Cog):
 
     @commands.command(aliases=['illusion'])
     async def aosip(self, ctx, phone, version='official'):
-        device = phone.lower()
+        device = self.meme(phone)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'http://aosip.dev/{device}/{version}') as fetch:
                 if fetch.status == 200:

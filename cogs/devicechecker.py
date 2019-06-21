@@ -33,6 +33,16 @@ class DeviceChecker(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    def meme(self, device):
+        if device.lower() == "memedo":
+            return "mido"
+        elif device.lower() == "ayy":
+            return "tissot"
+        elif device.lower() == "powo":
+            return "beryllium"
+        else:
+            return device.lower()
+
     reply_text = ''
     check = False
     timeout = aiohttp.ClientTimeout(total=3)
@@ -441,7 +451,7 @@ class DeviceChecker(commands.Cog):
 
     async def parallel(self, phone: str):
         self.check = True
-        device = phone.lower()
+        device = self.meme(phone)
         await asyncio.gather(
             self.getaexoreo(device),
             self.getaexpie(device),
@@ -475,12 +485,6 @@ class DeviceChecker(commands.Cog):
             else:
                 if self.check is True:
                     return
-                if device == "memedo":
-                    device = "mido"
-                elif device == "ayy":
-                    device = "tissot"
-                elif device == "powo":
-                    device = "beryllium"
 
                 await self.parallel(device)
                 if self.reply_text != '' and self.check is True:
